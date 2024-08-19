@@ -1,6 +1,8 @@
-import { Box, Button, createTheme, CssBaseline, Grid, Paper, TextField, ThemeProvider, Typography } from "@mui/material";
-import React, { useState } from "react";
+import { Box, Button, CircularProgress, createTheme, CssBaseline, Grid, Paper, TextField, ThemeProvider, Typography } from "@mui/material";
+import React, { useContext, useState } from "react";
 import logo from "../assets/logo.png"
+import { AuthContext } from "../context/AuthContext";
+import { useToast } from "../components/toast/Toast";
 
 const defaultTheme = createTheme({
     gradients: {
@@ -9,9 +11,13 @@ const defaultTheme = createTheme({
 });
 
 const Login = (props) => {
+    const { state: ContextState, login } = useContext(AuthContext);
     const [userNameError, setUserNameError] = useState(null)
     const [passwordError, setPasswordError] = useState(null)
-    const handleSubmit = (event) => {
+    const { toast } = useToast();
+    const networkErrorMsg = "I'm sorry, but it seems like there is a network error preventing me from displaying the requested content. Please check your internet connection and try again later. If the issue persists, please contact your network administrator for further assistance.";
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         console.log(data.get('username'))
@@ -31,6 +37,32 @@ const Login = (props) => {
 
 
         if (userNameError !== '' && passwordError !== '') {
+
+            let res = await login(data.get('username'), data.get('password'));
+
+            console.log(res)
+            let loginError;
+            if (res != null) {
+                if (res.code == "ERR_NETWORK") {
+                    loginError = networkErrorMsg
+                } else {
+                    switch (res.response.status) {
+                        case 401:
+                            loginError = "Invalid Username or Password"
+                            break;
+                    }
+                }
+
+                if (loginError) {
+                    toast('error', loginError);
+                }
+
+            }
+
+
+
+
+
 
         }
     };
@@ -60,7 +92,7 @@ const Login = (props) => {
                         >
                             <Grid item xs="2" sm="2" md="3">
 
-                                <img 
+                                <img
                                     alt="LOGO"
                                     src={logo}
                                     style={{
@@ -129,22 +161,35 @@ const Login = (props) => {
                                         />
 
 
-                                        <Button
-                                            type="submit"
-                                            variant="contained"
-                                            sx={{
-                                                mt: 8,
-                                                width: '30%',
-                                                mb: 2,
-                                                background: defaultTheme.gradients.primary,
-                                                transition: 'transform 0.3s ease', // Smooth transition for the transform effect
-                                                '&:hover': {
-                                                    background: defaultTheme.gradients.secondary, // Hover background color
-                                                    transform: 'scale(1.1)', // Scale up by 10%
-                                                }
-                                            }}
-                                        >Sign In
-                                        </Button>
+                                        {!ContextState.isLoginPending ? (
+                                            <Button
+                                                type="submit"
+                                                variant="contained"
+                                                sx={{
+                                                    mt: 8,
+                                                    width: '30%',
+                                                    mb: 2,
+                                                    background: defaultTheme.gradients.primary,
+                                                    transition: 'transform 0.3s ease', // Smooth transition for the transform effect
+                                                    '&:hover': {
+                                                        background: defaultTheme.gradients.secondary, // Hover background color
+                                                        transform: 'scale(1.1)', // Scale up by 10%
+                                                    }
+                                                }}
+                                            >
+                                                Sign In
+                                            </Button>
+                                        ) : (
+                                            <Box
+                                                display='flex'
+                                                justifyContent='center'
+                                                alignItems='center'
+                                                sx={{ width: '30%', height: '56px' }} // Adjust height to match button
+                                            >
+                                                <CircularProgress size={56} /> {/* Adjust size to match button height */}
+                                            </Box>
+                                        )}
+
 
 
 
