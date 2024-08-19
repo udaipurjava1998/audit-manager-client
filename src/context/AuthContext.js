@@ -4,7 +4,7 @@ import UserService from '../rest-services/UserService';
 import { useUser } from './UserContext';
 export const AuthContext = React.createContext("Default");
 const initialState = {
-  isLoggedIn: sessionStorage.getItem('encodedCredentials'),
+  isLoggedIn: localStorage.getItem('encodedCredentials')!=null,
   isLoginPending: false,
   loginError: null
 }
@@ -30,15 +30,15 @@ export const ContextProvider = props => {
       let res = await UserService.login(encodedCredentials);
       setLoginPending(false);
       setLoginSuccess(true);
-      sessionStorage.setItem('userDetail', JSON.stringify(res.data));
-      sessionStorage.setItem('encodedCredentials', encodedCredentials);
-      setUser(res.data)
+      localStorage.setItem('userDetail', JSON.stringify(res));
+      localStorage.setItem('encodedCredentials', encodedCredentials);
+      setUser(res)
 
       // Check authorization code with backend API
     } catch (error) {
 
-
-      console.log("herer............")
+      console.log(error)
+      console.log(`herer............`,error)
       loginError=error;
       setLoginPending(false);
       setLoginError(error);
@@ -53,8 +53,8 @@ export const ContextProvider = props => {
     setLoginSuccess(false);
     setLoginError(null);
     // Remove the access token from the browser's local storage
-    sessionStorage.removeItem('encodedCredentials');
-    sessionStorage.removeItem('userDetail');
+    localStorage.removeItem('encodedCredentials');
+    localStorage.removeItem('userDetail');
 
 
   }

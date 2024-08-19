@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import logo from "../assets/logo.png"
 import { AuthContext } from "../context/AuthContext";
 import { useToast } from "../components/toast/Toast";
+import config from "../config";
 
 const defaultTheme = createTheme({
     gradients: {
@@ -46,11 +47,14 @@ const Login = (props) => {
                 if (res.code == "ERR_NETWORK") {
                     loginError = networkErrorMsg
                 } else {
-                    switch (res.response.status) {
-                        case 401:
-                            loginError = "Invalid Username or Password"
-                            break;
+                    if(res.response){
+                        switch (res.response.status) {
+                            case 401:
+                                loginError = "Invalid Username or Password"
+                                break;
+                        }
                     }
+                 
                 }
 
                 if (loginError) {
@@ -74,7 +78,7 @@ const Login = (props) => {
                         container
                         component="main"
                         sx={{
-                            background: 'linear-gradient(313deg, rgba(90,185,193,1) 1%, rgba(235,240,218,1) 48%, rgba(255,255,255,1) 100%, rgba(30,30,30,1) 100%, rgba(30,30,30,1) 100%)',
+                            background: config.backgroundLinearGradient,
                             minHeight: '100vh', // Ensures full height of the viewport
                             justifyContent: { xs: 'center', md: 'flex-start' }, // Center on small screens
                             alignItems: { xs: 'center', md: 'flex-start' },     // Center on small screens

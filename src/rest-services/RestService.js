@@ -1,7 +1,7 @@
 import axiosInstance from "./axiosConfig";
 import { useState, useEffect } from "react";
 const CreateData = async (path, data) => {
-  const encodedCredentials = sessionStorage.getItem('encodedCredentials');
+  const encodedCredentials = localStorage.getItem('encodedCredentials');
   const config = {
     headers: {
       'Authorization': `Basic ${encodedCredentials}`
@@ -21,7 +21,7 @@ const CreateDataWithState = (path, data) => {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true)
-    const encodedCredentials = sessionStorage.getItem('encodedCredentials');
+    const encodedCredentials = localStorage.getItem('encodedCredentials');
     const config = {
       headers: {
         'Authorization': `Basic ${encodedCredentials}`
@@ -45,7 +45,7 @@ const CreateDataWithState = (path, data) => {
 };
 
 const UpdateData = async (path, data) => {
-  const encodedCredentials = sessionStorage.getItem('encodedCredentials');
+  const encodedCredentials = localStorage.getItem('encodedCredentials');
   const config = {
     headers: {
       'Authorization': `Basic ${encodedCredentials}`
@@ -61,7 +61,7 @@ const UpdateData = async (path, data) => {
 };
 
 const PartialUpdateData = async (path, data) => {
-  const encodedCredentials = sessionStorage.getItem('encodedCredentials');
+  const encodedCredentials = localStorage.getItem('encodedCredentials');
   const config = {
     headers: {
       'Authorization': `Basic ${encodedCredentials}`
@@ -77,7 +77,7 @@ const PartialUpdateData = async (path, data) => {
 };
 
 const DeleteData = async (path, id) => {
-  const encodedCredentials = sessionStorage.getItem('encodedCredentials');
+  const encodedCredentials = localStorage.getItem('encodedCredentials');
   const config = {
     headers: {
       'Authorization': `Basic ${encodedCredentials}`
@@ -97,7 +97,7 @@ const DeleteDataWithState = async (path, id) => {
 
   const [data, setData] = useState(null);
   useEffect(() => {
-    const encodedCredentials = sessionStorage.getItem('encodedCredentials');
+    const encodedCredentials = localStorage.getItem('encodedCredentials');
     const config = {
       headers: {
         'Authorization': `Basic ${encodedCredentials}`
@@ -122,7 +122,7 @@ const GetAllDataWithState = (path) => {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true)
-    const encodedCredentials = sessionStorage.getItem('encodedCredentials');
+    const encodedCredentials = localStorage.getItem('encodedCredentials');
     const config = {
       headers: {
         'Authorization': `Basic ${encodedCredentials}`
@@ -145,7 +145,7 @@ const GetAllDataWithState = (path) => {
 };
 
 const GetAllData = async (path) => {
-  const encodedCredentials = sessionStorage.getItem('encodedCredentials');
+  const encodedCredentials = localStorage.getItem('encodedCredentials');
   const config = {
     headers: {
       'Authorization': `Basic ${encodedCredentials}`
@@ -162,7 +162,7 @@ const GetAllData = async (path) => {
 };
 
 const GetByIdData = async (path, id) => {
-  const encodedCredentials = sessionStorage.getItem('encodedCredentials');
+  const encodedCredentials = localStorage.getItem('encodedCredentials');
   const config = {
     headers: {
       'Authorization': `Basic ${encodedCredentials}`
@@ -180,7 +180,7 @@ const GetByIdDataWithState = (path, id) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    const encodedCredentials = sessionStorage.getItem('encodedCredentials');
+    const encodedCredentials = localStorage.getItem('encodedCredentials');
     const config = {
       headers: {
         'Authorization': `Basic ${encodedCredentials}`
