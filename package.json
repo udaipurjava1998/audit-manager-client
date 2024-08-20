@@ -2,29 +2,38 @@
   "name": "audit-manger-client",
   "version": "0.1.0",
   "private": true,
+  "license": "SEE LICENSE IN <https://www.creative-tim.com/license>",
   "dependencies": {
-    "@emotion/react": "^11.13.0",
-    "@emotion/styled": "^11.13.0",
+    "@emotion/cache": "11.11.0",
+    "@emotion/react": "11.11.0",
+    "@emotion/styled": "11.11.0",
     "@mui/icons-material": "^5.16.7",
-    "@mui/material": "^5.16.7",
-    "@mui/styled-engine-sc": "^6.0.0-alpha.18",
-    "@mui/styles": "^5.16.7",
-    "@testing-library/jest-dom": "^6.4.8",
-    "@testing-library/user-event": "^14.5.2",
+    "@mui/material": "5.13.1",
+    "@mui/styled-engine": "5.12.3",
+    "@pathofdev/react-tag-input": "1.0.7",
+    "@testing-library/jest-dom": "5.16.5",
+    "@testing-library/react": "14.0.0",
+    "@testing-library/user-event": "14.4.3",
+    "ajv": "^8.17.1",
     "axios": "^1.7.4",
+    "chart.js": "3.9.1",
+    "chroma-js": "2.4.2",
     "history": "^5.3.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-router-dom": "^6.26.1",
-    "react-scripts": "^5.0.1",
-    "react-toastify": "^8.1.0",
+    "prop-types": "15.8.1",
+    "react": ">=16.8.0",
+    "react-chartjs-2": "3.0.4",
+    "react-countup": "6.4.2",
+    "react-dom": ">=16.8.0",
+    "react-github-btn": "1.4.0",
+    "react-perfect-scrollbar": "1.5.8",
+    "react-router-dom": "6.11.1",
+    "react-scripts": "5.0.1",
+    "react-toastify": "^10.0.5",
     "react-use": "^17.5.1",
-    "styled-components": "^6.1.12",
-    "web-vitals": "^4.2.3"
-  },
-  "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "env-cmd": "^10.1.0"
+    "stylis": "4.2.0",
+    "stylis-plugin-rtl": "2.1.1",
+    "swiper": "9.3.2",
+    "web-vitals": "3.3.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -34,7 +43,8 @@
     "build:dev": "env-cmd -f ./.dev.env npm run-script build",
     "start:dev": "env-cmd -f ./.dev.env npm run-script start",
     "build:prod": "env-cmd -f ./.prod.env npm run-script build",
-    "start:prod": "env-cmd -f ./.prod.env npm run-script start"
+    "start:prod": "env-cmd -f ./.prod.env npm run-script start",
+    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start"
   },
   "eslintConfig": {
     "extends": [
@@ -53,5 +63,23 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "env-cmd": "^10.1.0",
+    "eslint": "8.40.0",
+    "eslint-config-prettier": "8.8.0",
+    "eslint-plugin-import": "2.27.5",
+    "eslint-plugin-prettier": "4.2.1",
+    "eslint-plugin-react": "7.32.2",
+    "eslint-plugin-react-hooks": "4.6.0",
+    "prettier": "2.8.8"
+  },
+  "overrides": {
+    "svgo": "3.0.2"
   }
 }

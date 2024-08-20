@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from "react-dom/client";
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -7,15 +7,21 @@ import { UserProvider } from './context/UserContext';
 import { ContextProvider } from './context/AuthContext';
 import { ToastProvider } from './components/toast/Toast';
 import { DialogProvider } from './context/DialogProvider';
-
-ReactDOM.render(
+import { ArgonControllerProvider } from './context';
+import { BrowserRouter } from "react-router-dom";
+const container = document.getElementById("root");
+const root = createRoot(container);
+root.render(
   <UserProvider>
     <ContextProvider value={500}>
       <ToastProvider>
         <DialogProvider>
-          {/* <Router history={history}> */}
-          <App />
-          {/* </Router> */}
+          <ArgonControllerProvider>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          
+          </ArgonControllerProvider>
         </DialogProvider>
       </ToastProvider>
     </ContextProvider>
