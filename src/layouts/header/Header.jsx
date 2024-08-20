@@ -154,7 +154,7 @@ export default function Header() {
     <ThemeProvider theme={darkMode ? themeDark : theme}>
       <CssBaseline />
 
-      {!state.isLoggedIn ? <Login></Login> : layout === "dashboard" && (
+      {layout === "dashboard" && (
         <>
           <Sidenav
             color={sidenavColor}
@@ -171,7 +171,7 @@ export default function Header() {
       {layout === "vr" && <Configurator />}
       <Routes>
         {getRoutes(routes)}
-        <Route path="*" element={<Navigate to={!state.isLoggedIn?'/':'/dashboard'} />} />
+        <Route path="*" element={<Navigate to={!state.isLoggedIn?'/authentication/sign-in':'/dashboard'} />} />
       </Routes>
 
     </ThemeProvider>

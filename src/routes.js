@@ -64,10 +64,9 @@ Coded by www.creative-tim.com
 // import Profile from "layouts/profile";
 // import SignIn from "layouts/authentication/sign-in";
 // import SignUp from "layouts/authentication/sign-up";
-
-
 // Argon Dashboard 2 MUI components
 import ArgonBox from "./components/ArgonBox";
+import Login from "./layouts/authentication/Login";
 
 const routes = [
   {
@@ -77,6 +76,15 @@ const routes = [
     route: "/dashboard",
     icon: <ArgonBox component="i" color="primary" fontSize="14px" className="ni ni-tv-2" />,
     component: <Dashboard />,
+  },
+  {
+    name: "Sign In",
+    key: "sign-in",
+    route: "/authentication/sign-in",
+    icon: (
+      <ArgonBox component="i" color="warning" fontSize="14px" className="ni ni-single-copy-04" />
+    ),
+    component: <Login />,
   },
 ];
 
