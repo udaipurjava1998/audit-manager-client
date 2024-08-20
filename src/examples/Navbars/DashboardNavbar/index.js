@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 // react-router components
 import { useLocation, Link } from "react-router-dom";
@@ -58,6 +58,7 @@ import {
 // Images
 import team2 from "../../../assets/images/team-2.jpg";
 import logoSpotify from "../../../assets/images/small-logos/logo-spotify.svg";
+import { AuthContext } from "../../../context/AuthContext";
 
 function DashboardNavbar({ absolute, light, isMini }) {
   const [navbarType, setNavbarType] = useState();
@@ -65,7 +66,12 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const { miniSidenav, transparentNavbar, fixedNavbar, openConfigurator } = controller;
   const [openMenu, setOpenMenu] = useState(false);
   const route = useLocation().pathname.split("/").slice(1);
+ const { logout } = useContext(AuthContext);
+  const onLogout = (e) => {
+      e.preventDefault();
+      logout();
 
+  }
   useEffect(() => {
     // Setting the navbar type
     if (fixedNavbar) {
@@ -135,7 +141,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
       />
     </Menu>
   );
-
+ 
   return (
     <AppBar
       position={absolute ? "absolute" : navbarType}
@@ -171,7 +177,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
               />
             </ArgonBox>
             <ArgonBox color={light ? "white" : "inherit"}>
-              <Link to="/authentication/sign-in/basic">
+              
                 <IconButton sx={navbarIconButton} size="small">
                   <Icon
                     sx={({ palette: { dark, white } }) => ({
@@ -182,13 +188,14 @@ function DashboardNavbar({ absolute, light, isMini }) {
                   </Icon>
                   <ArgonTypography
                     variant="button"
+                    onClick={onLogout}
                     fontWeight="medium"
                     color={light && transparentNavbar ? "white" : "dark"}
                   >
-                    Sign in
+                    Logout
                   </ArgonTypography>
                 </IconButton>
-              </Link>
+            
               <IconButton
                 size="small"
                 color={light && transparentNavbar ? "white" : "dark"}

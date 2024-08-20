@@ -55,7 +55,7 @@ export const ContextProvider = props => {
     // Remove the access token from the browser's local storage
     localStorage.removeItem('encodedCredentials');
     localStorage.removeItem('userDetail');
-
+    window.location.href = "/";
 
   }
 
