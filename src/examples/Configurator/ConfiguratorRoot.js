@@ -50,7 +50,7 @@ export default styled(Drawer)(({ theme, ownerState }) => {
     "& .MuiDrawer-paper": {
       height: "100vh",
       margin: 0,
-      padding: `0 ${pxToRem(10)}`,
+      //padding: `0 ${pxToRem(10)}`,
       borderRadius: 0,
       boxShadow: lg,
       overflowY: "auto",

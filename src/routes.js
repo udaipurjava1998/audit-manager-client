@@ -56,7 +56,7 @@ Coded by www.creative-tim.com
 */
 
 // Argon Dashboard 2 MUI layouts
- import Dashboard from "./layouts/dashboard";
+import Dashboard from "./layouts/dashboard";
 // import Tables from "layouts/tables";
 // import Billing from "layouts/billing";
 // import VirtualReality from "layouts/virtual-reality";
@@ -67,8 +67,10 @@ Coded by www.creative-tim.com
 // Argon Dashboard 2 MUI components
 import ArgonBox from "./components/ArgonBox";
 import Login from "./layouts/authentication/Login";
+import DashboardLayout from "./examples/LayoutContainers/DashboardLayout";
+import { ImportExport, VerifiedUser } from "@mui/icons-material";
 
-const routes = [
+const menuRoutes = [
   {
     type: "route",
     name: "Dashboard",
@@ -77,6 +79,25 @@ const routes = [
     icon: <ArgonBox component="i" color="primary" fontSize="14px" className="ni ni-tv-2" />,
     component: <Dashboard />,
   },
+  {
+    type: "route",
+    name: "View Audit",
+    key: "view-audit",
+    route: "/view-audit",
+    icon: <VerifiedUser color="primary" fontSize="14px"/>,
+    component: <DashboardLayout></DashboardLayout>,
+  },
+  {
+    type: "route",
+    name: "Reports",
+    key: "Reports",
+    route: "/reports",
+    icon: <ImportExport color="primary" fontSize="14px"></ImportExport>    ,
+    component:  <DashboardLayout></DashboardLayout>,
+  },
+]
+const routes = [
+  ...menuRoutes,
   {
     name: "Sign In",
     key: "sign-in",

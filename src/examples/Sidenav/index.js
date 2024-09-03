@@ -33,6 +33,7 @@ import ArgonTypography from "../../components/ArgonTypography";
 
 // Argon Dashboard 2 MUI example components
 import SidenavItem from "./SidenavItem";
+// import SidenavFooter from "./SidenavFooter";
 
 // Custom styles for the Sidenav
 import SidenavRoot from "./SidenavRoot";
@@ -40,8 +41,11 @@ import sidenavLogoLabel from "./styles/sidenav";
 
 // Argon Dashboard 2 MUI context
 import { useArgonController,setMiniSidenav } from "../../context";
+import borders from "../../assets/theme/base/borders";
 
-function Sidenav({ color, brand, brandName, routes, ...rest }) {
+const { borderRadius } = borders;
+
+function Sidenav({ color, brand, brandMini, routes, ...rest }) {
   const [controller, dispatch] = useArgonController();
   const { miniSidenav, darkSidenav, layout } = controller;
   const location = useLocation();
@@ -118,7 +122,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
 
   return (
     <SidenavRoot {...rest} variant="permanent" ownerState={{ darkSidenav, miniSidenav, layout }}>
-      <ArgonBox pt={3} pb={1} px={4} textAlign="center">
+      <ArgonBox pt={1} pb={1} px={0.5}>
         <ArgonBox
           display={{ xs: "block", xl: "none" }}
           position="absolute"
@@ -134,10 +138,10 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
         </ArgonBox>
         <ArgonBox component={NavLink} to="/" display="flex" alignItems="center">
           {brand && (
-            <ArgonBox component="img" src={brand} alt="Argon Logo" width="2rem" mr={0.25} />
+            <ArgonBox  borderRadius ={borderRadius.xl} component="img" src={miniSidenav ?brandMini :brand} alt="Argon Logo" width={miniSidenav ?"5rem" :"15rem"} />
           )}
-          <ArgonBox
-            width={!brandName && "100%"}
+          {/* <ArgonBox
+            width={!brandMini && "100%"}
             sx={(theme) => sidenavLogoLabel(theme, { miniSidenav })}
           >
             <ArgonTypography
@@ -146,9 +150,9 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
               fontWeight="medium"
               color={darkSidenav ? "white" : "dark"}
             >
-              {brandName}
+              {brandMini}
             </ArgonTypography>
-          </ArgonBox>
+          </ArgonBox> */}
         </ArgonBox>
       </ArgonBox>
       <Divider light={darkSidenav} />
@@ -171,7 +175,7 @@ Sidenav.defaultProps = {
 Sidenav.propTypes = {
   color: PropTypes.oneOf(["primary", "secondary", "info", "success", "warning", "error", "dark"]),
   brand: PropTypes.string,
-  brandName: PropTypes.string.isRequired,
+  brandMini: PropTypes.string.isRequired,
   routes: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 

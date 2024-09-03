@@ -51,7 +51,9 @@ import routes from "../../routes";
 import { useArgonController, setMiniSidenav, setOpenConfigurator } from "../../context";
 // Images
 import brand from "../../assets/images/logo-ct.png";
+import brandMini from "../../assets/images/logo-ct-mini.png";
 import brandDark from "../../assets/images/logo-ct-dark.png";
+import brandDarkMini from "../../assets/images/logo-ct-dark-mini.png";
 
 // Icon Fonts
 import "../../assets/css/nucleo-icons.css";
@@ -159,7 +161,7 @@ export default function Header() {
           <Sidenav
             color={sidenavColor}
             brand={darkSidenav || darkMode ? brand : brandDark}
-            brandName="Argon Dashboard 2 PRO"
+            brandMini={darkSidenav || darkMode ? brandMini : brandDarkMini}
             routes={routes}
             onMouseEnter={handleOnMouseEnter}
             onMouseLeave={handleOnMouseLeave}

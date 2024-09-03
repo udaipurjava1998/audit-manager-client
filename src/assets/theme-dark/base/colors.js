@@ -61,8 +61,8 @@ const colors = {
   },
 
   success: {
-    main: "#2dce89",
-    focus: "#2dce89",
+    main: "#6db539",
+    focus: "#6db539",
   },
 
   warning: {
@@ -114,7 +114,7 @@ const colors = {
     },
 
     success: {
-      main: "#2dce89",
+      main: "#6db539",
       state: "#2dcecc",
     },
 
@@ -221,7 +221,7 @@ const colors = {
     },
 
     success: {
-      main: "#2dce89",
+      main: "#6db539",
       state: "#26adab",
       border: "#c0f0dc",
     },
@@ -296,7 +296,7 @@ const colors = {
   inputColors: {
     borderColor: { main: "#f0f2f566", focus: "#11cdef" },
     error: "#f5365c",
-    success: "#2dce89",
+    success: "#6db539",
   },
 
   sliderColors: {
