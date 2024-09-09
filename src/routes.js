@@ -68,7 +68,7 @@ import Dashboard from "./layouts/dashboard";
 import ArgonBox from "./components/ArgonBox";
 import Login from "./layouts/authentication/Login";
 import DashboardLayout from "./examples/LayoutContainers/DashboardLayout";
-import { ImportExport, VerifiedUser } from "@mui/icons-material";
+import { Checklist, ImportExport, Schedule, Storage, VerifiedUser } from "@mui/icons-material";
 import ViewAuditHome from "./layouts/view-audit/ViewAuditHome";
 
 const menuRoutes = [
@@ -82,18 +82,43 @@ const menuRoutes = [
   },
   {
     type: "route",
-    name: "View Audit",
-    key: "view-audit",
-    route: "/view-audit",
+    name: "Audit Planning Module",
+    key: "audit-log-activities",
+    route: "/audit-log-activities",
     icon: <VerifiedUser color="primary" fontSize="14px"/>,
     component: <ViewAuditHome></ViewAuditHome>,
   },
   {
     type: "route",
-    name: "Reports",
-    key: "reports",
-    route: "/reports",
+    name: "Master Data Management",
+    key: "master-data-management",
+    route: "/master-data-management",
+    icon: <Storage color="primary" fontSize="14px"></Storage>    ,
+    component:  <DashboardLayout></DashboardLayout>,
+  },
+  {
+    type: "route",
+    name: "Export Audit Report",
+    key: "export-audit-report",
+    route: "/export-audit-report",
     icon: <ImportExport color="primary" fontSize="14px"></ImportExport>    ,
+    component:  <DashboardLayout></DashboardLayout>,
+  },
+  {
+    type: "route",
+    name: "Scheduling Audit Report",
+    key: "scheduling-audit-report",
+    route: "/scheduling-audit-report",
+    icon: <Schedule color="primary" fontSize="14px"></Schedule>    ,
+    component:  <DashboardLayout></DashboardLayout>,
+  },
+
+  {
+    type: "route",
+    name: "Reporting",
+    key: "reporting",
+    route: "/reporting",
+    icon: <Checklist color="primary" fontSize="14px"></Checklist>    ,
     component:  <DashboardLayout></DashboardLayout>,
   },
 ]
