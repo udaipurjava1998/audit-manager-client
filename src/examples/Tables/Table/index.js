@@ -28,19 +28,20 @@ import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 
 // Argon Dashboard 2 MUI components
-import ArgonBox from "components/ArgonBox";
-import ArgonAvatar from "components/ArgonAvatar";
-import ArgonTypography from "components/ArgonTypography";
-
+import ArgonBox from "../../../components/ArgonBox";
+import ArgonAvatar from "../../../components/ArgonAvatar";
+import ArgonTypography from "../../../components/ArgonTypography";
 // Argon Dashboard 2 MUI base styles
-import typography from "assets/theme/base/typography";
-import borders from "assets/theme/base/borders";
+import typography from "../../../assets/theme/base/typography";
+import borders from "../../../assets/theme/base/borders";
+
+
 
 function Table({ columns, rows }) {
   const { size, fontWeightBold } = typography;
   const { borderWidth } = borders;
 
-  const renderColumns = columns.map(({ name, align, width }, key) => {
+  const renderColumns = columns.map(({ name, lable, align, width }, key) => {
     let pl;
     let pr;
 
@@ -71,7 +72,7 @@ function Table({ columns, rows }) {
         opacity={0.7}
         sx={({ palette: { light } }) => ({ borderBottom: `${borderWidth[1]} solid ${light.main}` })}
       >
-        {name.toUpperCase()}
+        {lable.toUpperCase()}
       </ArgonBox>
     );
   });

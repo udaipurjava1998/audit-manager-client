@@ -69,6 +69,7 @@ import ArgonBox from "./components/ArgonBox";
 import Login from "./layouts/authentication/Login";
 import DashboardLayout from "./examples/LayoutContainers/DashboardLayout";
 import { ImportExport, VerifiedUser } from "@mui/icons-material";
+import ViewAuditHome from "./layouts/view-audit/ViewAuditHome";
 
 const menuRoutes = [
   {
@@ -85,12 +86,12 @@ const menuRoutes = [
     key: "view-audit",
     route: "/view-audit",
     icon: <VerifiedUser color="primary" fontSize="14px"/>,
-    component: <DashboardLayout></DashboardLayout>,
+    component: <ViewAuditHome></ViewAuditHome>,
   },
   {
     type: "route",
     name: "Reports",
-    key: "Reports",
+    key: "reports",
     route: "/reports",
     icon: <ImportExport color="primary" fontSize="14px"></ImportExport>    ,
     component:  <DashboardLayout></DashboardLayout>,

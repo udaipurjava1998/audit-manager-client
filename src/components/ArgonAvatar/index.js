@@ -19,7 +19,8 @@ import { forwardRef } from "react";
 import PropTypes from "prop-types";
 
 // Custom styles for ArgonAvatar
-import ArgonAvatarRoot from "components/ArgonAvatar/ArgonAvatarRoot";
+import ArgonAvatarRoot from "./ArgonAvatarRoot";
+
 
 const ArgonAvatar = forwardRef(({ bgColor, size, shadow, ...rest }, ref) => (
   <ArgonAvatarRoot ref={ref} ownerState={{ shadow, bgColor, size }} {...rest} />
