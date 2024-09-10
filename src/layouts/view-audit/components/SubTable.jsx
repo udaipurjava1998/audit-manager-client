@@ -32,6 +32,7 @@ function SubTable({ subData }) {
         );
     };
 
+
     return (
         <>
             <Grid
@@ -43,8 +44,8 @@ function SubTable({ subData }) {
                 }}
             >
 
-                <Grid item xs={6}></Grid>
-                <Grid item xs={6}>
+
+                <Grid item xs={8}>
                     <Card>
                         <CardContent>
                             <Typography variant='h5' px={3} >History</Typography>
@@ -55,33 +56,39 @@ function SubTable({ subData }) {
                                         {getHeaderColumn('Old Value', 'center')}
                                         {getHeaderColumn('New Value', 'center')}
                                         {getHeaderColumn('Changed By', 'center')}
-                                        
+
 
                                     </TableRow>
-                                    {subData.map((item, index) => (
-                                        <TableRow key={index} hover sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                                            <TableCell sx={{ padding: paddingSize, textAlign: 'left' }}>
-                                                <ArgonTypography px={4} variant="caption" color="secondary" fontWeight="medium">
-                                                    {item.attributeName.toUpperCase()}
-                                                </ArgonTypography>
-                                            </TableCell>
-                                            <TableCell sx={{ padding: paddingSize, textAlign: 'center' }}>
-                                                <ArgonTypography px={4} variant="caption" color="warning" fontWeight="medium">
-                                                    {item.oldValue}
-                                                </ArgonTypography>
-                                            </TableCell>
-                                            <TableCell sx={{ padding: paddingSize, textAlign: 'center' }}>
-                                                <ArgonTypography px={4} variant="caption" color="success" fontWeight="medium">
-                                                    {item.newValue}
-                                                </ArgonTypography>
-                                            </TableCell>
-                                            <TableCell sx={{ padding: paddingSize, textAlign: 'center' }}>
-                                                <ArgonTypography px={4} variant="caption" color="success" fontWeight="medium">
-                                                    {item.changedBy}
-                                                </ArgonTypography>
-                                            </TableCell>
-                                        </TableRow>
-                                    ))}
+                                    {subData && subData.map((item, index) => {
+                                        console.log(`${item.oldValue} :: ${item.newValue}`)
+                                        const isChanged = item.oldValue !== item.newValue;
+
+                                        return (
+                                            <TableRow key={index} hover sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                                                <TableCell sx={{ padding: paddingSize, textAlign: 'left' }}>
+                                                    <ArgonTypography px={4} variant="caption" color="secondary" fontWeight="medium">
+                                                        {item.attributeName.toUpperCase()}
+                                                    </ArgonTypography>
+                                                </TableCell>
+                                                <TableCell sx={{ padding: paddingSize, textAlign: 'center' }}>
+                                                    <ArgonTypography px={4} variant="caption" color={isChanged ? "warning" : "secondary"} fontWeight="medium">
+                                                        {item.oldValue}
+                                                    </ArgonTypography>
+                                                </TableCell>
+                                                <TableCell sx={{ padding: paddingSize, textAlign: 'center' }}>
+                                                    <ArgonTypography px={4} variant="caption" color={isChanged ? "success" : "secondary"} fontWeight="medium">
+                                                        {item.newValue}
+                                                    </ArgonTypography>
+                                                </TableCell>
+                                                <TableCell sx={{ padding: paddingSize, textAlign: 'center' }}>
+                                                    <ArgonTypography px={4} variant="caption" color="secondary" fontWeight="medium">
+                                                        {item.changedBy}
+                                                    </ArgonTypography>
+                                                </TableCell>
+                                            </TableRow>
+                                        );
+                                    })}
+
                                 </TableBody>
                             </Table>
                         </CardContent>

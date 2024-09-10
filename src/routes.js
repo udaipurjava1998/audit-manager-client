@@ -94,7 +94,7 @@ const menuRoutes = [
     key: "master-data-management",
     route: "/master-data-management",
     icon: <Storage color="primary" fontSize="14px"></Storage>    ,
-    component:  <DashboardLayout></DashboardLayout>,
+    component:  <DashboardLayout><></></DashboardLayout>,
   },
   {
     type: "route",
@@ -102,7 +102,7 @@ const menuRoutes = [
     key: "export-audit-report",
     route: "/export-audit-report",
     icon: <ImportExport color="primary" fontSize="14px"></ImportExport>    ,
-    component:  <DashboardLayout></DashboardLayout>,
+    component:  <DashboardLayout><></></DashboardLayout>,
   },
   {
     type: "route",
@@ -110,7 +110,7 @@ const menuRoutes = [
     key: "scheduling-audit-report",
     route: "/scheduling-audit-report",
     icon: <Schedule color="primary" fontSize="14px"></Schedule>    ,
-    component:  <DashboardLayout></DashboardLayout>,
+    component:  <DashboardLayout><></></DashboardLayout>,
   },
 
   {
@@ -119,7 +119,7 @@ const menuRoutes = [
     key: "reporting",
     route: "/reporting",
     icon: <Checklist color="primary" fontSize="14px"></Checklist>    ,
-    component:  <DashboardLayout></DashboardLayout>,
+    component:  <DashboardLayout><></></DashboardLayout>,
   },
 ]
 const routes = [

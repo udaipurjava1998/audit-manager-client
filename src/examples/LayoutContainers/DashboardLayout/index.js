@@ -34,7 +34,7 @@ function DashboardLayout({ bgColor, children, ...rest }) {
 
   useEffect(() => {
     setLayout(dispatch, "dashboard");
-  }, [pathname]);
+  }, [pathname,dispatch]);
 
   const background = darkMode && !bgColor ? "transparent" : bgColor;
 

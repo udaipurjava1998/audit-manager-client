@@ -31,7 +31,7 @@ export const ContextProvider = props => {
       setLoginPending(false);
       setLoginSuccess(true);
       localStorage.setItem('userDetail', JSON.stringify(res));
-      localStorage.setItem('encodedCredentials', encodedCredentials);
+      localStorage.setItem('encodedCredentials', res['accessToken']);
       setUser(res)
       window.location.href = "/dashboard";
       // Check authorization code with backend API

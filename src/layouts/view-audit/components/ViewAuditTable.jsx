@@ -26,7 +26,7 @@ function ViewAuditTable({ columns, rows }) {
         setExpandedRow(expandedRow === rowKey ? null : rowKey);
     };
 
-    const renderColumns = columns.map(({ name, lable, align, width }, key) => {
+    const renderColumns = columns.map(({ name, label, align, width }, key) => {
         let pl = key === 0 ? 3 : 1;
         let pr = key === columns.length - 1 ? 3 : 1;
 
@@ -46,7 +46,7 @@ function ViewAuditTable({ columns, rows }) {
                 opacity={0.7}
                 sx={({ palette: { light } }) => ({ borderBottom: `${borderWidth[1]} solid ${light.main}` })}
             >
-                {lable.toUpperCase()}
+                {label && label.toUpperCase()}
             </ArgonBox>
         );
     });

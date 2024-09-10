@@ -39,9 +39,9 @@ import themeDark from "../../assets/theme-dark";
 import themeDarkRTL from "../../assets/theme-dark/theme-rtl";
 
 // RTL plugins
-import rtlPlugin from "stylis-plugin-rtl";
-import { CacheProvider } from "@emotion/react";
-import createCache from "@emotion/cache";
+// import rtlPlugin from "stylis-plugin-rtl";
+// import { CacheProvider } from "@emotion/react";
+// import createCache from "@emotion/cache";
 
 // Argon Dashboard 2 MUI routes
 // import routes from "routes";
@@ -75,15 +75,15 @@ export default function Header() {
   const [rtlCache, setRtlCache] = useState(null);
   const { pathname } = useLocation();
 
-  // Cache for the rtl
-  useMemo(() => {
-    const cacheRtl = createCache({
-      key: "rtl",
-      stylisPlugins: [rtlPlugin],
-    });
+  // // Cache for the rtl
+  // useMemo(() => {
+  //   const cacheRtl = createCache({
+  //     key: "rtl",
+  //     stylisPlugins: [rtlPlugin],
+  //   });
 
-    setRtlCache(cacheRtl);
-  }, []);
+  //   setRtlCache(cacheRtl);
+  // }, []);
 
   // Open sidenav when mouse enter on mini sidenav
   const handleOnMouseEnter = () => {

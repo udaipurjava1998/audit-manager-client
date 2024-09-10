@@ -4,7 +4,7 @@ const CreateData = async (path, data) => {
   const encodedCredentials = localStorage.getItem('encodedCredentials');
   const config = {
     headers: {
-      'Authorization': `Basic ${encodedCredentials}`
+      'Authorization': `Bearer ${encodedCredentials}`
     }
   };
   try {
@@ -24,7 +24,7 @@ const CreateDataWithState = (path, data) => {
     const encodedCredentials = localStorage.getItem('encodedCredentials');
     const config = {
       headers: {
-        'Authorization': `Basic ${encodedCredentials}`
+        'Authorization': `Bearer ${encodedCredentials}`
       }
     };
     try {
@@ -48,7 +48,7 @@ const UpdateData = async (path, data) => {
   const encodedCredentials = localStorage.getItem('encodedCredentials');
   const config = {
     headers: {
-      'Authorization': `Basic ${encodedCredentials}`
+      'Authorization': `Bearer ${encodedCredentials}`
     }
   };
   try {
@@ -64,7 +64,7 @@ const PartialUpdateData = async (path, data) => {
   const encodedCredentials = localStorage.getItem('encodedCredentials');
   const config = {
     headers: {
-      'Authorization': `Basic ${encodedCredentials}`
+      'Authorization': `Bearer ${encodedCredentials}`
     }
   };
   try {
@@ -80,7 +80,7 @@ const DeleteData = async (path, id) => {
   const encodedCredentials = localStorage.getItem('encodedCredentials');
   const config = {
     headers: {
-      'Authorization': `Basic ${encodedCredentials}`
+      'Authorization': `Bearer ${encodedCredentials}`
     }
   };
   try {
@@ -100,7 +100,7 @@ const DeleteDataWithState = async (path, id) => {
     const encodedCredentials = localStorage.getItem('encodedCredentials');
     const config = {
       headers: {
-        'Authorization': `Basic ${encodedCredentials}`
+        'Authorization': `Bearer ${encodedCredentials}`
       }
     };
     try {
@@ -125,7 +125,7 @@ const GetAllDataWithState = (path) => {
     const encodedCredentials = localStorage.getItem('encodedCredentials');
     const config = {
       headers: {
-        'Authorization': `Basic ${encodedCredentials}`
+        'Authorization': `Bearer ${encodedCredentials}`
       }
     };
     try {
@@ -148,7 +148,7 @@ const GetAllData = async (path) => {
   const encodedCredentials = localStorage.getItem('encodedCredentials');
   const config = {
     headers: {
-      'Authorization': `Basic ${encodedCredentials}`
+      'Authorization': `Bearer ${encodedCredentials}`
     }
   };
   try {
@@ -165,7 +165,7 @@ const GetByIdData = async (path, id) => {
   const encodedCredentials = localStorage.getItem('encodedCredentials');
   const config = {
     headers: {
-      'Authorization': `Basic ${encodedCredentials}`
+      'Authorization': `Bearer ${encodedCredentials}`
     }
   };
   try {
@@ -183,7 +183,7 @@ const GetByIdDataWithState = (path, id) => {
     const encodedCredentials = localStorage.getItem('encodedCredentials');
     const config = {
       headers: {
-        'Authorization': `Basic ${encodedCredentials}`
+        'Authorization': `Bearer ${encodedCredentials}`
       }
     };
     try {

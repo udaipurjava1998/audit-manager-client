@@ -4,12 +4,29 @@ import DashboardNavbar from "../dashboard/DashboardNavbar";
 import ArgonBox from "../../components/ArgonBox";
 import { Card } from "@mui/material";
 import ArgonTypography from "../../components/ArgonTypography";
-import Table from "../../examples/Tables/Table";
 import { viewAuditTableData } from "./data/viewAuditData";
 import ViewAuditTable from "./components/ViewAuditTable";
+import AuditModuleServiceAPI from "../../rest-services/audit-module-service";
+import ViewAuditTableSkeleton from "./components/ViewAuditTableSkeleton";
 
 const ViewAuditHome = (props) => {
-    const { columns, rows } = viewAuditTableData
+    const [response, setResponse] = React.useState(null);
+    const [loading, setLoading] = React.useState(false);
+    const { columns, rows } = viewAuditTableData(response != null ? response.data : []);
+    React.useEffect(() => {
+        const fetchData = async () => {
+            setLoading(true);
+            try {
+                const response = await AuditModuleServiceAPI.findAll()
+                setResponse(response)
+            } catch (e) {
+
+            } finally {
+                setLoading(false);
+            }
+        }
+        fetchData()
+    }, [])
     return (
         <>
             <DashboardLayout>
@@ -29,7 +46,7 @@ const ViewAuditHome = (props) => {
                                         },
                                     },
                                 }}
-                            > <ViewAuditTable columns={columns} rows={rows} /></ArgonBox>
+                            >{loading ? <ViewAuditTableSkeleton columns={columns} /> : <ViewAuditTable columns={columns} rows={rows} />}</ArgonBox>
                         </Card>
                     </ArgonBox>
                 </ArgonBox>
