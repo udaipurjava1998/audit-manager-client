@@ -130,22 +130,26 @@ const CreateOrUpdateAudit = (props) => {
                                         alignItems: "start",
                                     }}>
                                     <AttributeInputField
+                                        placeholder={"Attribute Name"}
                                         value={attributeTrackerObject.attributeName}
                                         fieldName={"attributeName"}
                                         valid={valid}
                                     />
                                     
                                     <AttributeInputField
+                                        placeholder={"Old Value"}
                                         value={attributeTrackerObject.oldValue}
                                         fieldName={"oldValue"}
                                         valid={valid}
                                     />
                                     <AttributeInputField
+                                        placeholder={"New Value"}
                                         value={attributeTrackerObject.newValue}
                                         fieldName={"newValue"}
                                         valid={valid}
                                     />
                                     <AttributeInputField
+                                        placeholder={"Changed By"}
                                         value={attributeTrackerObject.changedBy}
                                         fieldName={"changedBy"}
                                         valid={valid}

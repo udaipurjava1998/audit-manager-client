@@ -60,16 +60,16 @@ import team2 from "../../../assets/images/team-2.jpg";
 import logoSpotify from "../../../assets/images/small-logos/logo-spotify.svg";
 import { AuthContext } from "../../../context/AuthContext";
 
-function DashboardNavbar({ absolute, light, isMini }) {
+function DashboardNavbar({ absolute = false, light = true, isMini = false }) {
   const [navbarType, setNavbarType] = useState();
   const [controller, dispatch] = useArgonController();
   const { miniSidenav, transparentNavbar, fixedNavbar, openConfigurator } = controller;
   const [openMenu, setOpenMenu] = useState(false);
   const route = useLocation().pathname.split("/").slice(1);
- const { logout } = useContext(AuthContext);
+  const { logout } = useContext(AuthContext);
   const onLogout = (e) => {
-      e.preventDefault();
-      logout();
+    e.preventDefault();
+    logout();
 
   }
   useEffect(() => {
@@ -141,7 +141,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
       /> */}
     </Menu>
   );
- 
+
   return (
     <AppBar
       position={absolute ? "absolute" : navbarType}
@@ -228,6 +228,15 @@ function DashboardNavbar({ absolute, light, isMini }) {
     </AppBar>
   );
 }
+
+// Setting default values for the props of DashboardNavbar
+// DashboardNavbar.defaultProps = {
+//   absolute: false,
+//   light: true,
+//   isMini: false,
+// };
+
+// Typechecking props for the DashboardNavbar
 
 DashboardNavbar.propTypes = {
   absolute: PropTypes.bool,

@@ -27,7 +27,7 @@ import Icon from "@mui/material/Icon";
 import ArgonBox from "../../components/ArgonBox";
 import ArgonTypography from "../../components/ArgonTypography";
 
-function Breadcrumbs({ icon, title, route, light = false }) {
+function Breadcrumbs({ icon, title, route, light = true }) {
   const routes = route.slice(0, -1);
 
   return (
