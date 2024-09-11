@@ -1,19 +1,18 @@
-import { Box, Button, CircularProgress, createTheme, CssBaseline, Grid, Link, Paper, Switch, TextField, ThemeProvider, Typography } from "@mui/material";
+import { Link,  Switch } from "@mui/material";
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { useToast } from "../../components/toast/Toast";
-import config from "../../config";
 import IllustrationLayout from "./components/IllustrationLayout";
 import ArgonBox from "../../components/ArgonBox";
 import ArgonInput from "../../components/ArgonInput";
 import ArgonTypography from "../../components/ArgonTypography";
 import ArgonButton from "../../components/ArgonButton";
 
-const defaultTheme = createTheme({
-    gradients: {
-        primary: 'linear-gradient(to right, #4332e9, #6e9336)',
-    },
-});
+// const defaultTheme = createTheme({
+//     gradients: {
+//         primary: 'linear-gradient(to right, #4332e9, #6e9336)',
+//     },
+// });
 // Image
 const bgImage =
     "https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signin-ill.jpg";
@@ -58,13 +57,15 @@ const Login = (props) => {
             console.log(res)
             let loginError;
             if (res != null) {
-                if (res.code == "ERR_NETWORK") {
+                if (res.code === "ERR_NETWORK") {
                     loginError = networkErrorMsg
                 } else {
                     if (res.response) {
                         switch (res.response.status) {
                             case 401:
                                 loginError = "Invalid Username or Password"
+                                break;
+                            default:
                                 break;
                         }
                     }
