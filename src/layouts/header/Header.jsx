@@ -159,7 +159,7 @@ export default function Header() {
       {layout === "dashboard" && (
         <>
           <Sidenav
-            color={sidenavColor}
+            color={sidenavColor||"primary"}
             brand={darkSidenav || darkMode ? brand : brandDark}
             brandMini={darkSidenav || darkMode ? brandMini : brandDarkMini}
             routes={routes}

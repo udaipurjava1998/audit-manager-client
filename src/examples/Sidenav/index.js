@@ -45,7 +45,7 @@ import borders from "../../assets/theme/base/borders";
 
 const { borderRadius } = borders;
 
-function Sidenav({ color, brand, brandMini, routes, ...rest }) {
+function Sidenav({ color= "info",  brand= "", brandMini, routes, ...rest }) {
   const [controller, dispatch] = useArgonController();
   const { miniSidenav, darkSidenav, layout } = controller;
   const location = useLocation();
@@ -165,11 +165,11 @@ function Sidenav({ color, brand, brandMini, routes, ...rest }) {
   );
 }
 
-// Setting default values for the props of Sidenav
-Sidenav.defaultProps = {
-  color: "info",
-  brand: "",
-};
+// // Setting default values for the props of Sidenav
+// Sidenav.defaultProps = {
+//   color: "info",
+//   brand: "",
+// };
 
 // Typechecking props for the Sidenav
 Sidenav.propTypes = {

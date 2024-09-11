@@ -62,11 +62,11 @@ function SidenavItem({ icon, name, active, open, ...rest }) {
 }
 
 // Setting default values for the props of SidenavItem
-SidenavItem.defaultProps = {
-  color: "info",
-  active: false,
-  open: false,
-};
+// SidenavItem.defaultProps = {
+//   color: "info",
+//   active: false,
+//   open: false,
+// };
 
 // Typechecking props for the SidenavItem
 SidenavItem.propTypes = {
