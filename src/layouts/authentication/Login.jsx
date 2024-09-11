@@ -16,12 +16,12 @@ const defaultTheme = createTheme({
 });
 // Image
 const bgImage =
-  "https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signin-ill.jpg";
+    "https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signin-ill.jpg";
 
 const Login = (props) => {
     const { state: ContextState, login } = useContext(AuthContext);
-    const [userNameError, setUserNameError] = useState(null)
-    const [passwordError, setPasswordError] = useState(null)
+    const [userNameError, setUserNameError] = useState('')
+    const [passwordError, setPasswordError] = useState('')
     const { toast } = useToast();
     const networkErrorMsg = "I'm sorry, but it seems like there is a network error preventing me from displaying the requested content. Please check your internet connection and try again later. If the issue persists, please contact your network administrator for further assistance.";
     const [rememberMe, setRememberMe] = useState(false);
@@ -33,20 +33,25 @@ const Login = (props) => {
         console.log(data.get('username'))
         console.log(data.get('password'))
         console.log((userNameError !== '' && passwordError !== ''))
+        let isValid = false;
         if (data.get('username') === '') {
             setUserNameError("Please Enter User Name");
+            isValid = false;
         } else {
             setUserNameError(null)
+            isValid = true;
         }
 
         if (data.get('password') === '') {
             setPasswordError("Please Enter Password");
+            isValid = false;
         } else {
             setPasswordError(null)
+            isValid = true;
         }
 
 
-        if (userNameError !== '' && passwordError !== '') {
+        if (isValid) {
 
             let res = await login(data.get('username'), data.get('password'));
 
@@ -71,12 +76,6 @@ const Login = (props) => {
                 }
 
             }
-
-
-
-
-
-
         }
     };
     return (
@@ -93,10 +92,10 @@ const Login = (props) => {
             >
                 <ArgonBox component="form" role="form" onSubmit={handleSubmit}>
                     <ArgonBox mb={2}>
-                        <ArgonInput type="text" id="username" name="username" placeholder="Email" size="large" />
+                        <ArgonInput helperText={userNameError} error={Boolean(userNameError)} type="text" id="username" name="username" placeholder="Email" size="large" />
                     </ArgonBox>
                     <ArgonBox mb={2}>
-                        <ArgonInput type="password" id="password" name="password" placeholder="Password" size="large" />
+                        <ArgonInput helperText={passwordError} error={Boolean(passwordError)} type="password" id="password" name="password" placeholder="Password" size="large" />
                     </ArgonBox>
                     <ArgonBox display="flex" alignItems="center">
                         <Switch checked={rememberMe} onChange={handleSetRememberMe} />
@@ -110,7 +109,7 @@ const Login = (props) => {
                         </ArgonTypography>
                     </ArgonBox>
                     <ArgonBox mt={4} mb={1}>
-                        <ArgonButton type="submit" disabled={ContextState.isLoginPending} color={ContextState.isLoginPending?"secondary":"info"} size="large" fullWidth>
+                        <ArgonButton type="submit" disabled={ContextState.isLoginPending} color={ContextState.isLoginPending ? "secondary" : "info"} size="large" fullWidth>
                             Sign In
                         </ArgonButton>
                     </ArgonBox>

@@ -24,12 +24,16 @@ import ArgonInputRoot from "./ArgonInputRoot";
 
 // Argon Dashboard 2 MUI context
 import { useArgonController } from "../../context";
-const ArgonInput = forwardRef(({ size, error, success, disabled, ...rest }, ref) => {
+import { FormControl, FormHelperText } from "@mui/material";
+const ArgonInput = forwardRef(({ size, error, success, disabled,helperText, ...rest }, ref) => {
   const [controller] = useArgonController();
   const { darkMode } = controller;
 
   return (
-    <ArgonInputRoot {...rest} ref={ref} ownerState={{ size, error, success, disabled, darkMode }} />
+    <FormControl error={error} fullWidth>
+      <ArgonInputRoot {...rest} ref={ref} ownerState={{ size, error, success, disabled, darkMode }} />
+      {helperText && <FormHelperText>{helperText}</FormHelperText>}
+    </FormControl>
   );
 });
 
