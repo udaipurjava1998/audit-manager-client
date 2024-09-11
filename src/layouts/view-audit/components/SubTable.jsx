@@ -4,9 +4,11 @@ import ArgonBox from '../../../components/ArgonBox';
 import typography from '../../../assets/theme/base/typography';
 import borders from '../../../assets/theme/base/borders';
 import ArgonTypography from '../../../components/ArgonTypography';
+import ArgonButton from '../../../components/ArgonButton';
 
-function SubTable({ subData }) {
+function SubTable({ subData, gridSize = { xs: 8 }, title = "History"}) {
     var paddingSize = '5px'
+
     const { size, fontWeightBold } = typography;
     const { borderWidth } = borders;
     const getHeaderColumn = (headerName, align) => {
@@ -45,10 +47,18 @@ function SubTable({ subData }) {
             >
 
 
-                <Grid item xs={8}>
+                <Grid item xs={gridSize.xs}>
                     <Card>
                         <CardContent>
-                            <Typography variant='h5' px={3} >History</Typography>
+                          {title &&  <Grid container
+                                direction="row"
+                                sx={{
+                                    justifyContent: "space-between",
+                                    alignItems: "center",
+                                }}>
+                                <Typography variant='h5' px={3} >{title}</Typography>
+                               
+                            </Grid> }
                             <Table sx={{ minWidth: 100 }} aria-label="simple table">
                                 <TableBody sx={{ minWidth: 650 }} aria-label="simple table">
                                     <TableRow>

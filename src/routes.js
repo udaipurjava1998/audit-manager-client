@@ -70,6 +70,7 @@ import Login from "./layouts/authentication/Login";
 import DashboardLayout from "./examples/LayoutContainers/DashboardLayout";
 import { Checklist, ImportExport, Schedule, Storage, VerifiedUser } from "@mui/icons-material";
 import ViewAuditHome from "./layouts/view-audit/ViewAuditHome";
+import CreateOrUpdateAudit from "./layouts/view-audit/CreateOrUpdateAudit";
 
 const menuRoutes = [
   {
@@ -132,6 +133,12 @@ const routes = [
       <ArgonBox component="i" color="warning" fontSize="14px" className="ni ni-single-copy-04" />
     ),
     component: <Login />,
+  },
+  {
+    name: "Audit Planning Module",
+    key: "audit-log-activities",
+    route: "/audit-log-activities/create",
+    component: <CreateOrUpdateAudit />,
   },
 ];
 

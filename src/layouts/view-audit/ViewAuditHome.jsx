@@ -8,6 +8,8 @@ import { viewAuditTableData } from "./data/viewAuditData";
 import ViewAuditTable from "./components/ViewAuditTable";
 import AuditModuleServiceAPI from "../../rest-services/audit-module-service";
 import ViewAuditTableSkeleton from "./components/ViewAuditTableSkeleton";
+import ArgonButton from "../../components/ArgonButton";
+import { Link } from "react-router-dom";
 
 const ViewAuditHome = (props) => {
     const [response, setResponse] = React.useState(null);
@@ -34,8 +36,9 @@ const ViewAuditHome = (props) => {
                 <ArgonBox py={3}>
                     <ArgonBox mb={3}>
                         <Card>
-                            <ArgonBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
+                            <ArgonBox display="flex" justifyContent="space-between" alignItems="center" p={2} >
                                 <ArgonTypography variant="h6">Audit View</ArgonTypography>
+                                <ArgonButton component={Link} to={"./create"} color={"info"}>Create</ArgonButton>
                             </ArgonBox>
                             <ArgonBox
                                 sx={{
