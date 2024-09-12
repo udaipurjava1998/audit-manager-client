@@ -21,7 +21,7 @@ export default styled(Button)(({ theme, ownerState }) => {
   const { palette, functions, borders } = theme;
   const { color, variant, size, circular, iconOnly } = ownerState;
 
-  const { white, dark, text, transparent, gradients } = palette;
+  const { white, dark, transparent, gradients } = palette;
   const { boxShadow, linearGradient, pxToRem, rgba } = functions;
   const { borderRadius } = borders;
 

@@ -4,21 +4,17 @@ import DashboardNavbar from "../dashboard/DashboardNavbar";
 import ArgonBox from "../../components/ArgonBox";
 import { Card, Grid, TableCell, Tooltip } from "@mui/material";
 import ArgonTypography from "../../components/ArgonTypography";
-import ArgonInput from "../../components/ArgonInput";
 import SubTable, { subTablePaddingSize } from "./components/SubTable";
 import ArgonButton from "../../components/ArgonButton";
 import AttributeInputField from "./components/AttributeInputField";
 import useValidation from "../../hooks/GlobalValidationHook";
 import { initialTempAttibuteData, initialTempObjectData } from "./data/createOrUpdate";
 import ObjectTrackerInputField from "./components/ObjectTrackerInputField";
-import { DatePicker } from "@mui/x-date-pickers";
 import CustomDatepicker from "./components/CustomDatePicker";
-import moment from "moment";
 import { DateFormatter, eventOccurenceDateFormat } from "../../utils/DateFormatter";
 import AuditObjectChangeTrackerServiceAPI from "../../rest-services/audit-object-change-tracker-service";
 import { useToast } from "../../components/toast/Toast";
 import SimpleBackdrop from "../../components/SimpleBackDrop";
-import ActionButton from "./components/ActionButton";
 import { Delete, Edit } from "@mui/icons-material";
 import AuditAttributeChangeTrackerServiceAPI from "../../rest-services/audit-attribute-change-tracker-service";
 
@@ -88,7 +84,7 @@ const CreateOrUpdateAudit = (props) => {
                                     }
                                 }}
                                     sx={{ width: 30 }}
-                                    color={"success"}>Save</ArgonButton>
+                                    color={"success"}>{isCreated()?"Update":"Save"}</ArgonButton>
                             </ArgonBox>
                             <ArgonBox
                                 px={4}
@@ -173,7 +169,7 @@ const CreateOrUpdateAudit = (props) => {
                                             disabled={!isCreated()}
                                             color={"success"}
                                         >
-                                            Add
+                                            {attributeTrackerData.id===null?'Add':'Update'}
                                         </ArgonButton>
                                     </div>
                                 </Tooltip>

@@ -16,7 +16,7 @@ Coded by www.creative-tim.com
 import { useState, useEffect, useContext } from "react";
 
 // react-router components
-import { useLocation, Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 // prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
@@ -35,7 +35,7 @@ import ArgonInput from "../../../components/ArgonInput";
 
 // Argon Dashboard 2 MUI example components
 import Breadcrumbs from "../../../examples/Breadcrumbs";
-import NotificationItem from "../../../examples/Items/NotificationItem";
+// import NotificationItem from "../../../examples/Items/NotificationItem";
 
 // Custom styles for DashboardNavbar
 import {
@@ -56,8 +56,8 @@ import {
 } from "../../../context";
 
 // Images
-import team2 from "../../../assets/images/team-2.jpg";
-import logoSpotify from "../../../assets/images/small-logos/logo-spotify.svg";
+// import team2 from "../../../assets/images/team-2.jpg";
+// import logoSpotify from "../../../assets/images/small-logos/logo-spotify.svg";
 import { AuthContext } from "../../../context/AuthContext";
 
 function DashboardNavbar({ absolute = false, light = true, isMini = false }) {

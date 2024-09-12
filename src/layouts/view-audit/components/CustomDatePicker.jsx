@@ -1,8 +1,7 @@
-import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import { DatePicker } from "@mui/x-date-pickers";
 import moment from "moment";
 import React from "react";
-import { DateFormatter, eventOccurenceDateFormat } from "../../../utils/DateFormatter";
+import {eventOccurenceDateFormat } from "../../../utils/DateFormatter";
 
 const CustomDatepicker = ({ defaultValue, onChange }) => {
   return (

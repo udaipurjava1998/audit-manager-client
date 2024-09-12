@@ -23,7 +23,7 @@ import Grid from "@mui/material/Grid";
 
 // Argon Dashboard 2 MUI example components
 
-import DefaultNavbar from "../../../../examples/Navbars/DefaultNavbar";
+// import DefaultNavbar from "../../../../examples/Navbars/DefaultNavbar";
 import PageLayout from "../../../../examples/LayoutContainers/PageLayout";
 import ArgonBox from "../../../../components/ArgonBox";
 import ArgonTypography from "../../../../components/ArgonTypography";

@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState, useEffect, useMemo, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 
 // react-router components
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
@@ -34,9 +34,7 @@ import Configurator from "../../examples/Configurator";
 
 // Argon Dashboard 2 MUI themes
 import theme from "../../assets/theme"
-import themeRTL from "../../assets/theme/theme-rtl";
 import themeDark from "../../assets/theme-dark";
-import themeDarkRTL from "../../assets/theme-dark/theme-rtl";
 
 // RTL plugins
 // import rtlPlugin from "stylis-plugin-rtl";
@@ -59,7 +57,6 @@ import brandDarkMini from "../../assets/images/logo-ct-dark-mini.png";
 import "../../assets/css/nucleo-icons.css";
 import "../../assets/css/nucleo-svg.css";
 import { AuthContext } from "../../context/AuthContext";
-import Login from "../authentication/Login";
 import config from "../../config";
 
 
@@ -72,7 +69,7 @@ export default function Header() {
   const { miniSidenav, direction, layout, openConfigurator, sidenavColor, darkSidenav, darkMode } =
     controller;
   const [onMouseEnter, setOnMouseEnter] = useState(false);
-  const [rtlCache, setRtlCache] = useState(null);
+  // const [rtlCache, setRtlCache] = useState(null);
   const { pathname } = useLocation();
 
   // // Cache for the rtl

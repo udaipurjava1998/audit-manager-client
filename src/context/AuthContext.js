@@ -10,7 +10,7 @@ const initialState = {
 }
 
 export const ContextProvider = props => {
-  const { user, setUser } = useUser();
+  const {setUser } = useUser();
   // const navigate = useNavigate();
   const [state, setState] = useSetState(initialState);
   const setLoginPending = (isLoginPending) => setState({ isLoginPending });

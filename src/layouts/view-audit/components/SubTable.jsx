@@ -1,16 +1,15 @@
 import React from 'react';
-import { Table, TableBody, TableCell, TableHead, TableRow, Typography, Box, Grid, Card, CardContent } from '@mui/material';
+import { Table, TableBody, TableCell, TableRow, Typography, Grid, Card, CardContent } from '@mui/material';
 import ArgonBox from '../../../components/ArgonBox';
 import typography from '../../../assets/theme/base/typography';
-import borders from '../../../assets/theme/base/borders';
+// import borders from '../../../assets/theme/base/borders';
 import ArgonTypography from '../../../components/ArgonTypography';
-import ArgonButton from '../../../components/ArgonButton';
 export const subTablePaddingSize = '5px'
 function SubTable({ subData, gridSize = { xs: 8 }, title = "History",actions }) {
     
 
     const { size, fontWeightBold } = typography;
-    const { borderWidth } = borders;
+    // const { borderWidth } = borders;
     const getHeaderColumn = (headerName, align) => {
         return (
             <ArgonBox

@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 // react-router-dom components
 import { useLocation, NavLink } from "react-router-dom";
@@ -37,7 +37,7 @@ import SidenavItem from "./SidenavItem";
 
 // Custom styles for the Sidenav
 import SidenavRoot from "./SidenavRoot";
-import sidenavLogoLabel from "./styles/sidenav";
+// import sidenavLogoLabel from "./styles/sidenav";
 
 // Argon Dashboard 2 MUI context
 import { useArgonController,setMiniSidenav } from "../../context";

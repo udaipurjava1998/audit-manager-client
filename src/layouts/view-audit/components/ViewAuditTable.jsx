@@ -4,17 +4,16 @@ import ArgonTypography from "../../../components/ArgonTypography";
 import React, { useMemo, useState } from "react";
 
 // prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 // uuid is a library for generating unique id
 import { v4 as uuidv4 } from "uuid";
-import { Collapse, TableBody, TableCell, TableContainer, TableRow } from "@mui/material";
+import { Collapse, TableBody, TableContainer, TableRow } from "@mui/material";
 import typography from "../../../assets/theme/base/typography";
 import borders from "../../../assets/theme/base/borders";
 // @mui material components
 import { Table as MuiTable } from "@mui/material";
 import ActionButton from "./ActionButton";
-import { json } from "react-router-dom";
 import SubTable from "./SubTable";
 function ViewAuditTable({ columns, rows }) {
     const { size, fontWeightBold } = typography;

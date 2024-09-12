@@ -1,6 +1,6 @@
-import RestService from "./RestService";
+// import RestService from "./RestService";
 import axios from 'axios';
-const basePath = '/user'
+// const basePath = '/user'
 const UserService = {
   login: async (encodedCredentials) => {
   const config = {
