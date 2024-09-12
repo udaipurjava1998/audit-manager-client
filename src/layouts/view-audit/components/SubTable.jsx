@@ -5,9 +5,9 @@ import typography from '../../../assets/theme/base/typography';
 import borders from '../../../assets/theme/base/borders';
 import ArgonTypography from '../../../components/ArgonTypography';
 import ArgonButton from '../../../components/ArgonButton';
-
-function SubTable({ subData, gridSize = { xs: 8 }, title = "History"}) {
-    var paddingSize = '5px'
+export const subTablePaddingSize = '5px'
+function SubTable({ subData, gridSize = { xs: 8 }, title = "History",actions }) {
+    
 
     const { size, fontWeightBold } = typography;
     const { borderWidth } = borders;
@@ -50,15 +50,15 @@ function SubTable({ subData, gridSize = { xs: 8 }, title = "History"}) {
                 <Grid item xs={gridSize.xs}>
                     <Card>
                         <CardContent>
-                          {title &&  <Grid container
+                            {title && <Grid container
                                 direction="row"
                                 sx={{
                                     justifyContent: "space-between",
                                     alignItems: "center",
                                 }}>
                                 <Typography variant='h5' px={3} >{title}</Typography>
-                               
-                            </Grid> }
+
+                            </Grid>}
                             <Table sx={{ minWidth: 100 }} aria-label="simple table">
                                 <TableBody sx={{ minWidth: 650 }} aria-label="simple table">
                                     <TableRow>
@@ -66,7 +66,7 @@ function SubTable({ subData, gridSize = { xs: 8 }, title = "History"}) {
                                         {getHeaderColumn('Old Value', 'center')}
                                         {getHeaderColumn('New Value', 'center')}
                                         {getHeaderColumn('Changed By', 'center')}
-
+                                        {actions && getHeaderColumn('Action', 'center')}
 
                                     </TableRow>
                                     {subData && subData.map((item, index) => {
@@ -75,26 +75,27 @@ function SubTable({ subData, gridSize = { xs: 8 }, title = "History"}) {
 
                                         return (
                                             <TableRow key={index} hover sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                                                <TableCell sx={{ padding: paddingSize, textAlign: 'left' }}>
+                                                <TableCell sx={{ padding: subTablePaddingSize, textAlign: 'left' }}>
                                                     <ArgonTypography px={4} variant="caption" color="secondary" fontWeight="medium">
                                                         {item.attributeName.toUpperCase()}
                                                     </ArgonTypography>
                                                 </TableCell>
-                                                <TableCell sx={{ padding: paddingSize, textAlign: 'center' }}>
+                                                <TableCell sx={{ padding: subTablePaddingSize, textAlign: 'center' }}>
                                                     <ArgonTypography px={4} variant="caption" color={isChanged ? "warning" : "secondary"} fontWeight="medium">
                                                         {item.oldValue}
                                                     </ArgonTypography>
                                                 </TableCell>
-                                                <TableCell sx={{ padding: paddingSize, textAlign: 'center' }}>
+                                                <TableCell sx={{ padding: subTablePaddingSize, textAlign: 'center' }}>
                                                     <ArgonTypography px={4} variant="caption" color={isChanged ? "success" : "secondary"} fontWeight="medium">
                                                         {item.newValue}
                                                     </ArgonTypography>
                                                 </TableCell>
-                                                <TableCell sx={{ padding: paddingSize, textAlign: 'center' }}>
+                                                <TableCell sx={{ padding: subTablePaddingSize, textAlign: 'center' }}>
                                                     <ArgonTypography px={4} variant="caption" color="secondary" fontWeight="medium">
                                                         {item.changedBy}
                                                     </ArgonTypography>
                                                 </TableCell>
+                                                {actions && actions(item, index)}
                                             </TableRow>
                                         );
                                     })}

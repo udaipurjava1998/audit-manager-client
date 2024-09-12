@@ -1,8 +1,8 @@
 import RestService from "./RestService";
 
-const baseUrl = "/audit-module";
+const baseUrl = "/audit-object-change-tracker";
 
-const AuditModuleServiceAPI = {
+const AuditObjectChangeTrackerServiceAPI = {
     findAll: async () => {
         return await RestService.GetAllData(baseUrl);
     },
@@ -10,4 +10,4 @@ const AuditModuleServiceAPI = {
         return await RestService.CreateData(baseUrl,data)
     }
 }
-export default AuditModuleServiceAPI;
+export default AuditObjectChangeTrackerServiceAPI;

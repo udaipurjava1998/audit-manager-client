@@ -8,6 +8,7 @@ export const initialTempAttibuteData = {
     oldValue: null,
     newValue: null,
     changedBy: null,
+    auditObjectChangeTrackerId:null,
     validationRules: {
         attributeName: [
             { name: ValidationRuleNames.isRequired, value: true },

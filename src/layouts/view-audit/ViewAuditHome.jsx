@@ -6,7 +6,7 @@ import { Card } from "@mui/material";
 import ArgonTypography from "../../components/ArgonTypography";
 import { viewAuditTableData } from "./data/viewAuditData";
 import ViewAuditTable from "./components/ViewAuditTable";
-import AuditModuleServiceAPI from "../../rest-services/audit-module-service";
+import AuditObjectChangeTrackerServiceAPI from "../../rest-services/audit-object-change-tracker-service";
 import ViewAuditTableSkeleton from "./components/ViewAuditTableSkeleton";
 import ArgonButton from "../../components/ArgonButton";
 import { Link } from "react-router-dom";
@@ -19,7 +19,7 @@ const ViewAuditHome = (props) => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const response = await AuditModuleServiceAPI.findAll()
+                const response = await AuditObjectChangeTrackerServiceAPI.findAll()
                 setResponse(response)
             } catch (e) {
 

@@ -14,6 +14,7 @@ export function ToastProvider({ children }) {
       value={
         { 
           toast: (type,message) => toast[type](message),
+          toastWithCommonResponse: (response) => toast[response.status===200?'success':'error'](response.message),
           toastPromise:(newToastPromise) => toast.promise(newToastPromise, {
             pending: {
               render(){

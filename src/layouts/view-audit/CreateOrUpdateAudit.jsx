@@ -2,10 +2,10 @@ import React from "react"
 import DashboardLayout from "../../examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "../dashboard/DashboardNavbar";
 import ArgonBox from "../../components/ArgonBox";
-import { Card, Grid, Tooltip } from "@mui/material";
+import { Card, Grid, TableCell, Tooltip } from "@mui/material";
 import ArgonTypography from "../../components/ArgonTypography";
 import ArgonInput from "../../components/ArgonInput";
-import SubTable from "./components/SubTable";
+import SubTable, { subTablePaddingSize } from "./components/SubTable";
 import ArgonButton from "../../components/ArgonButton";
 import AttributeInputField from "./components/AttributeInputField";
 import useValidation from "../../hooks/GlobalValidationHook";
@@ -15,20 +15,57 @@ import { DatePicker } from "@mui/x-date-pickers";
 import CustomDatepicker from "./components/CustomDatePicker";
 import moment from "moment";
 import { DateFormatter, eventOccurenceDateFormat } from "../../utils/DateFormatter";
-import AuditModuleServiceAPI from "../../rest-services/audit-module-service";
+import AuditObjectChangeTrackerServiceAPI from "../../rest-services/audit-object-change-tracker-service";
+import { useToast } from "../../components/toast/Toast";
+import SimpleBackdrop from "../../components/SimpleBackDrop";
+import ActionButton from "./components/ActionButton";
+import { Delete, Edit } from "@mui/icons-material";
+import AuditAttributeChangeTrackerServiceAPI from "../../rest-services/audit-attribute-change-tracker-service";
 
 const CreateOrUpdateAudit = (props) => {
-
+    const [loading, seloading] = React.useState(false)
     const [subData, setSubData] = React.useState([]);
     const [attributeTrackerData, setAttributeTrackerData] = React.useState(initialTempAttibuteData);
     const attributeTrackerValidator = useValidation(attributeTrackerData, setAttributeTrackerData);
     const [objectTrackerData, setObjectTrackerData] = React.useState(initialTempObjectData);
     const objectTrackerValidator = useValidation(objectTrackerData, setObjectTrackerData);
     const isCreated = () => {
-        return objectTrackerData.id === null;
+        return objectTrackerData.id !== null;
+    }
+    const removeByIndex = (indexToRemove) => {
+        setSubData((prevData) =>
+            prevData.filter((_, index) => index !== indexToRemove)
+        );
+    };
+    const getActions = (item, index) => {
+        return (
+            <TableCell sx={{ padding: subTablePaddingSize, textAlign: 'center' }}>
+
+                <Grid
+                    container
+                    direction="row"
+                    sx={{
+                        justifyContent: "space-around",
+                        alignItems: "center",
+                    }}
+                >
+
+                    <Edit onClick={() => {
+                        var seletedItem = subData[index];
+                        seletedItem.index = index
+                        setAttributeTrackerData(seletedItem)
+                        removeByIndex(index);
+                    }} />
+                    <Delete onClick={() => {
+                        removeByIndex(index)
+                    }} />
+                </Grid>
+
+            </TableCell>)
     }
 
-    return (
+    const { toastWithCommonResponse } = useToast();
+    return loading ? <SimpleBackdrop /> : (
         <>
             <DashboardLayout>
                 <DashboardNavbar />
@@ -40,11 +77,14 @@ const CreateOrUpdateAudit = (props) => {
                                 <ArgonButton onClick={async () => {
                                     if (await objectTrackerValidator.validateForm()) {
                                         console.log("Adding attribute:", objectTrackerData);
-                                        var response = await AuditModuleServiceAPI.createAuditObjectChangeTracker(objectTrackerData);
-                                       console.log(response)
-                                        if(response.status===200){
-                                            objectTrackerValidator.handleChange("id",response.data.id);
+                                        seloading(true)
+                                        var response = await AuditObjectChangeTrackerServiceAPI.createAuditObjectChangeTracker(objectTrackerData);
+                                        seloading(false)
+                                        if (response.status === 200) {
+                                            objectTrackerValidator.handleChange("id", response.data.id);
+
                                         }
+                                        toastWithCommonResponse(response)
                                     }
                                 }}
                                     sx={{ width: 30 }}
@@ -70,12 +110,6 @@ const CreateOrUpdateAudit = (props) => {
                                         justifyContent: "space-between",
                                         alignItems: "start",
                                     }}>
-
-                                    {/* <Grid item xs={2} sm={4} md={4} >
-                                        <ArgonBox mb={2}>
-                                            <ArgonInput type="text" id="refObjectId" name="refObjectId" placeholder="Ref Object Id" size="large" />
-                                        </ArgonBox>
-                                    </Grid> */}
                                     <ObjectTrackerInputField
                                         placeholder={"Ref Object Id"}
                                         value={objectTrackerData.refObjectId}
@@ -86,12 +120,6 @@ const CreateOrUpdateAudit = (props) => {
                                         value={objectTrackerData.eventType}
                                         fieldName={"eventType"}
                                         validator={objectTrackerValidator} />
-
-                                    {/* <ObjectTrackerInputField
-                                        placeholder={"Event Occurence"}
-                                        value={objectTrackerData.eventOccurence}
-                                        fieldName={"eventOccurence"}
-                                        validator={objectTrackerValidator} /> */}
                                     <Grid item xs={2} sm={4} md={4} >
                                         <ArgonBox mb={2}>
                                             <CustomDatepicker defaultValue={objectTrackerData.eventOccurence} onChange={(newDate) => {
@@ -100,16 +128,6 @@ const CreateOrUpdateAudit = (props) => {
                                             }}></CustomDatepicker>
                                         </ArgonBox>
                                     </Grid>
-                                    {/* <Grid item xs={2} sm={4} md={4} >
-                                        <ArgonBox mb={2}>
-                                            <ArgonInput type="text" id="eventType" name="eventType" placeholder="Event Type" size="large" />
-                                        </ArgonBox>
-                                    </Grid>
-                                    <Grid item xs={2} sm={4} md={4}>
-                                        <ArgonBox mb={2}>
-                                            <ArgonInput type="text" id="eventOccurence" name="eventOccurence" placeholder="Event Occurence" size="large" />
-                                        </ArgonBox>
-                                    </Grid> */}
 
                                 </Grid>
                             </ArgonBox>
@@ -121,17 +139,38 @@ const CreateOrUpdateAudit = (props) => {
                                             onClick={async () => {
                                                 if (await attributeTrackerValidator.validateForm()) {
                                                     console.log("Adding attribute:", attributeTrackerData);
-                                                    setSubData((previousValue) => [
-                                                        ...previousValue,
-                                                        attributeTrackerData
-                                                    ]);
-                                                    console.log("Resetting attribute tracker to:", initialTempAttibuteData);
-                                                    setAttributeTrackerData(initialTempAttibuteData);
-                                                    console.log("after reset attribute:", attributeTrackerData)
+                                                    attributeTrackerData.auditObjectChangeTrackerId=objectTrackerData.id
+                                                    var response = await AuditAttributeChangeTrackerServiceAPI.createAuditAttributeChangeTracker(attributeTrackerData);
+
+                                                    toastWithCommonResponse(response)
+                                                    if (response.status === 200) {
+                                                        attributeTrackerData.id=response.data.id;
+                                                        setSubData((previousValue) => {
+                                                            
+                                                            var updatedArray = [...previousValue];
+
+                                                            // Ensure the index exists before updating
+                                                            if (attributeTrackerData.index) {
+                                                                updatedArray = [
+                                                                    ...updatedArray.slice(0, attributeTrackerData.index),
+                                                                    attributeTrackerData,
+                                                                    ...updatedArray.slice(attributeTrackerData.index)
+                                                                ];
+                                                            } else {
+                                                                updatedArray.push(attributeTrackerData); // Push to the end if the index doesn't exist
+                                                            }
+
+                                                            return updatedArray;
+                                                        });
+
+                                                        setAttributeTrackerData(initialTempAttibuteData);
+
+                                                    }
+
                                                 }
                                             }}
                                             sx={{ width: 30 }}
-                                            disabled={isCreated()}
+                                            disabled={!isCreated()}
                                             color={"success"}
                                         >
                                             Add
@@ -191,28 +230,11 @@ const CreateOrUpdateAudit = (props) => {
                                         validator={attributeTrackerValidator}
                                     />
 
-                                    {/* <AttributeInputField
-                                        id={'oldValue'}
-                                        placeholder="Old Value"
-                                        data={attributeTrackerObject}
-                                        onChange={(e) => onChangeTempValue('oldValue', e.target.value)} />
-                                    <AttributeInputField
-                                        id={'newValue'}
-                                        placeholder="New Value"
-                                        data={attributeTrackerObject}
-                                        onChange={(e) => onChangeTempValue('newValue', e.target.value)} />
-                                    <AttributeInputField
-                                        id={'changedBy'}
-                                        placeholder="Changed By"
-                                        data={attributeTrackerObject}
-                                        onChange={(e) => onChangeTempValue('changedBy', e.target.value)} /> */}
-
-
-
                                 </Grid>
                             </ArgonBox>
                             <SubTable
                                 subData={subData}
+                                actions={getActions}
                                 gridSize={{ xs: 12 }}
                                 title={null}></SubTable>
                         </Card>
