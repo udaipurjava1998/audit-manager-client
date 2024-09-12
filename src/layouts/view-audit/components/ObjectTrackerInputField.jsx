@@ -3,10 +3,10 @@ import React from "react"
 import ArgonBox from "../../../components/ArgonBox";
 import ArgonInput from "../../../components/ArgonInput";
 
-const AttributeInputField = ({ placeholder, fieldName,validator }) => {
+const ObjectTrackerInputField = ({ placeholder, fieldName, validator }) => {
     let error = validator.errors[fieldName];
     return (
-        <Grid item xs={2} sm={3} md={3} key={fieldName}>
+        <Grid item xs={2} sm={4} md={4} >
             <ArgonBox mb={2}>
                 <ArgonInput
                     key={`key-${fieldName}`}
@@ -18,11 +18,11 @@ const AttributeInputField = ({ placeholder, fieldName,validator }) => {
                     helperText={error}
                     error={Boolean(error)}
                     onChange={(e) => validator.handleChange(fieldName, e.target.value)}
-                    value={validator.state[fieldName]||''}
+                    value={validator.state[fieldName] || ''}
                 />
             </ArgonBox>
         </Grid>
     )
 };
 
-export default AttributeInputField;
+export default ObjectTrackerInputField;

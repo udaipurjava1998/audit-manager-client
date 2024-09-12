@@ -7,7 +7,6 @@ const ActionButton = ({ isOpened, onClick }) => {
     return (
 
         <ArgonButton
-            //endIcon={isOpened ? <Remove /> : <Add />}
             size="small"
             sx={{ width: 40, fontSize: 10 }}
             onClick={onClick} to={"/dev"}

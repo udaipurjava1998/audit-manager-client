@@ -2,33 +2,32 @@ import React from "react"
 import DashboardLayout from "../../examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "../dashboard/DashboardNavbar";
 import ArgonBox from "../../components/ArgonBox";
-import { Card, Grid } from "@mui/material";
+import { Card, Grid, Tooltip } from "@mui/material";
 import ArgonTypography from "../../components/ArgonTypography";
 import ArgonInput from "../../components/ArgonInput";
 import SubTable from "./components/SubTable";
 import ArgonButton from "../../components/ArgonButton";
 import AttributeInputField from "./components/AttributeInputField";
 import useValidation from "../../hooks/GlobalValidationHook";
-import { ValidationRuleNames } from "../../hooks/validation";
+import { initialTempAttibuteData, initialTempObjectData } from "./data/createOrUpdate";
+import ObjectTrackerInputField from "./components/ObjectTrackerInputField";
+import { DatePicker } from "@mui/x-date-pickers";
+import CustomDatepicker from "./components/CustomDatePicker";
+import moment from "moment";
+import { DateFormatter, eventOccurenceDateFormat } from "../../utils/DateFormatter";
+import AuditModuleServiceAPI from "../../rest-services/audit-module-service";
 
 const CreateOrUpdateAudit = (props) => {
-    const initialTempAttibuteData = {
-        id: null,
-        attributeName: null,
-        oldValue: null,
-        newValue: null,
-        changedBy: null,
-        validationRules: {
-            attributeName: [
-                { name: ValidationRuleNames.isRequired, value: true },
-            ],
-        }
 
-    };
     const [subData, setSubData] = React.useState([]);
-    const [attributeTrackerObject, setAttributeTrackerObject] = React.useState(initialTempAttibuteData);
+    const [attributeTrackerData, setAttributeTrackerData] = React.useState(initialTempAttibuteData);
+    const attributeTrackerValidator = useValidation(attributeTrackerData, setAttributeTrackerData);
+    const [objectTrackerData, setObjectTrackerData] = React.useState(initialTempObjectData);
+    const objectTrackerValidator = useValidation(objectTrackerData, setObjectTrackerData);
+    const isCreated = () => {
+        return objectTrackerData.id === null;
+    }
 
-    const valid = useValidation(attributeTrackerObject, setAttributeTrackerObject);
     return (
         <>
             <DashboardLayout>
@@ -38,7 +37,18 @@ const CreateOrUpdateAudit = (props) => {
                         <Card>
                             <ArgonBox display="flex" justifyContent="space-between" alignItems="center" p={2} >
                                 <ArgonTypography variant="h6">Add Audit Object Tracker</ArgonTypography>
-                                <ArgonButton sx={{ width: 30 }} color={"success"}>Save</ArgonButton>
+                                <ArgonButton onClick={async () => {
+                                    if (await objectTrackerValidator.validateForm()) {
+                                        console.log("Adding attribute:", objectTrackerData);
+                                        var response = await AuditModuleServiceAPI.createAuditObjectChangeTracker(objectTrackerData);
+                                       console.log(response)
+                                        if(response.status===200){
+                                            objectTrackerValidator.handleChange("id",response.data.id);
+                                        }
+                                    }
+                                }}
+                                    sx={{ width: 30 }}
+                                    color={"success"}>Save</ArgonButton>
                             </ArgonBox>
                             <ArgonBox
                                 px={4}
@@ -51,9 +61,6 @@ const CreateOrUpdateAudit = (props) => {
                                         },
                                     },
                                 }}
-                                //  component="form"
-                                //  role="form"
-                                onSubmit={() => { }}
                             >
 
                                 <Grid container
@@ -64,12 +71,36 @@ const CreateOrUpdateAudit = (props) => {
                                         alignItems: "start",
                                     }}>
 
-                                    <Grid item xs={2} sm={4} md={4} >
+                                    {/* <Grid item xs={2} sm={4} md={4} >
                                         <ArgonBox mb={2}>
                                             <ArgonInput type="text" id="refObjectId" name="refObjectId" placeholder="Ref Object Id" size="large" />
                                         </ArgonBox>
-                                    </Grid>
+                                    </Grid> */}
+                                    <ObjectTrackerInputField
+                                        placeholder={"Ref Object Id"}
+                                        value={objectTrackerData.refObjectId}
+                                        fieldName={"refObjectId"}
+                                        validator={objectTrackerValidator} />
+                                    <ObjectTrackerInputField
+                                        placeholder={"Event Type"}
+                                        value={objectTrackerData.eventType}
+                                        fieldName={"eventType"}
+                                        validator={objectTrackerValidator} />
+
+                                    {/* <ObjectTrackerInputField
+                                        placeholder={"Event Occurence"}
+                                        value={objectTrackerData.eventOccurence}
+                                        fieldName={"eventOccurence"}
+                                        validator={objectTrackerValidator} /> */}
                                     <Grid item xs={2} sm={4} md={4} >
+                                        <ArgonBox mb={2}>
+                                            <CustomDatepicker defaultValue={objectTrackerData.eventOccurence} onChange={(newDate) => {
+
+                                                objectTrackerValidator.handleChange("eventOccurence", DateFormatter.dateToString(newDate, eventOccurenceDateFormat))
+                                            }}></CustomDatepicker>
+                                        </ArgonBox>
+                                    </Grid>
+                                    {/* <Grid item xs={2} sm={4} md={4} >
                                         <ArgonBox mb={2}>
                                             <ArgonInput type="text" id="eventType" name="eventType" placeholder="Event Type" size="large" />
                                         </ArgonBox>
@@ -78,30 +109,35 @@ const CreateOrUpdateAudit = (props) => {
                                         <ArgonBox mb={2}>
                                             <ArgonInput type="text" id="eventOccurence" name="eventOccurence" placeholder="Event Occurence" size="large" />
                                         </ArgonBox>
-                                    </Grid>
+                                    </Grid> */}
 
                                 </Grid>
                             </ArgonBox>
                             <ArgonBox display="flex" justifyContent="space-between" alignItems="center" p={2} >
                                 <ArgonTypography variant="h6">Add Audit  Attribute  Tracker</ArgonTypography>
-                                <ArgonButton
-                                    onClick={async () => {
-                                        if (await valid.validateForm()) {
-                                            console.log("Adding attribute:", attributeTrackerObject);
-                                            setSubData((previousValue) => [
-                                                ...previousValue,
-                                                attributeTrackerObject
-                                            ]);
-                                            console.log("Resetting attribute tracker to:", initialTempAttibuteData);
-                                            setAttributeTrackerObject(initialTempAttibuteData);
-                                            console.log("after reset attribute:", attributeTrackerObject)
-                                        }
-                                    }}
-                                    sx={{ width: 30 }}
-                                    color={"success"}
-                                >
-                                    Add
-                                </ArgonButton>
+                                <Tooltip title={isCreated() ? "" : "Please Save Audit first"}>
+                                    <div>
+                                        <ArgonButton
+                                            onClick={async () => {
+                                                if (await attributeTrackerValidator.validateForm()) {
+                                                    console.log("Adding attribute:", attributeTrackerData);
+                                                    setSubData((previousValue) => [
+                                                        ...previousValue,
+                                                        attributeTrackerData
+                                                    ]);
+                                                    console.log("Resetting attribute tracker to:", initialTempAttibuteData);
+                                                    setAttributeTrackerData(initialTempAttibuteData);
+                                                    console.log("after reset attribute:", attributeTrackerData)
+                                                }
+                                            }}
+                                            sx={{ width: 30 }}
+                                            disabled={isCreated()}
+                                            color={"success"}
+                                        >
+                                            Add
+                                        </ArgonButton>
+                                    </div>
+                                </Tooltip>
 
                             </ArgonBox>
                             <ArgonBox
@@ -131,28 +167,28 @@ const CreateOrUpdateAudit = (props) => {
                                     }}>
                                     <AttributeInputField
                                         placeholder={"Attribute Name"}
-                                        value={attributeTrackerObject.attributeName}
+                                        value={attributeTrackerData.attributeName}
                                         fieldName={"attributeName"}
-                                        valid={valid}
+                                        validator={attributeTrackerValidator}
                                     />
-                                    
+
                                     <AttributeInputField
                                         placeholder={"Old Value"}
-                                        value={attributeTrackerObject.oldValue}
+                                        value={attributeTrackerData.oldValue}
                                         fieldName={"oldValue"}
-                                        valid={valid}
+                                        validator={attributeTrackerValidator}
                                     />
                                     <AttributeInputField
                                         placeholder={"New Value"}
-                                        value={attributeTrackerObject.newValue}
+                                        value={attributeTrackerData.newValue}
                                         fieldName={"newValue"}
-                                        valid={valid}
+                                        validator={attributeTrackerValidator}
                                     />
                                     <AttributeInputField
                                         placeholder={"Changed By"}
-                                        value={attributeTrackerObject.changedBy}
+                                        value={attributeTrackerData.changedBy}
                                         fieldName={"changedBy"}
-                                        valid={valid}
+                                        validator={attributeTrackerValidator}
                                     />
 
                                     {/* <AttributeInputField
