@@ -15,7 +15,7 @@ import { DateFormatter, eventOccurenceDateFormat } from "../../utils/DateFormatt
 import AuditObjectChangeTrackerServiceAPI from "../../rest-services/audit-object-change-tracker-service";
 import { useToast } from "../../components/toast/Toast";
 import SimpleBackdrop from "../../components/SimpleBackDrop";
-import { Delete, Edit } from "@mui/icons-material";
+import { Edit } from "@mui/icons-material";
 import AuditAttributeChangeTrackerServiceAPI from "../../rest-services/audit-attribute-change-tracker-service";
 import { useDecodedId } from "../../hooks/useDecodedData";
 import BackButton from "../../components/BackButton";

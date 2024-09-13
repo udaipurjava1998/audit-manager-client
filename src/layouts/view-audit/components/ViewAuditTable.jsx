@@ -8,18 +8,18 @@ import React, { useMemo, useState } from "react";
 
 // uuid is a library for generating unique id
 import { v4 as uuidv4 } from "uuid";
-import { Collapse, Pagination, PaginationItem, TableBody, TableContainer, TableRow } from "@mui/material";
+import { Collapse, TableBody, TableContainer, TableRow } from "@mui/material";
 import typography from "../../../assets/theme/base/typography";
 import borders from "../../../assets/theme/base/borders";
 // @mui material components
 import { Table as MuiTable } from "@mui/material";
 import ActionButton from "./ActionButton";
 import SubTable from "./SubTable";
-import { ArrowBack, ArrowForward } from "@mui/icons-material";
+// import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import pxToRem from "../../../assets/theme/functions/pxToRem";
 import ServerSidePagination from "../../../components/ServerSidePagination";
 function ViewAuditTable({ columns, rows,data,setPageNo }) {
-    const { size, fontWeightBold } = typography;
+    // const { size, fontWeightBold } = typography;
     const { borderWidth } = borders;
 
     const [expandedRow, setExpandedRow] = useState(null);

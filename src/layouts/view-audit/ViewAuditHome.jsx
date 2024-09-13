@@ -15,9 +15,9 @@ import FadeInComponent from "../../components/FadeInComponent";
 const ViewAuditHome = (props) => {
     const [response, setResponse] = React.useState(null);
     const [loading, setLoading] = React.useState(false);
-    const { columns, rows,filterIntialValue } = viewAuditTableData(response != null ? response.data.content : []);
+    const { columns, rows } = viewAuditTableData(response != null ? response.data.content : []);
     const [pageNo, setPageNo] = React.useState(1)
-    const [filter, setFilter] = React.useState(filterIntialValue);
+    // const [filter, setFilter] = React.useState(filterIntialValue);
     React.useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
