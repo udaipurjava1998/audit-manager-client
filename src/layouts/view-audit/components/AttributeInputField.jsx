@@ -3,7 +3,7 @@ import React from "react"
 import ArgonBox from "../../../components/ArgonBox";
 import ArgonInput from "../../../components/ArgonInput";
 
-const AttributeInputField = ({ placeholder, fieldName,validator }) => {
+const AttributeInputField = ({ placeholder, fieldName,validator,disabled }) => {
     let error = validator.errors[fieldName];
     return (
         <Grid item xs={2} sm={3} md={3} key={fieldName}>
@@ -12,6 +12,7 @@ const AttributeInputField = ({ placeholder, fieldName,validator }) => {
                     key={`key-${fieldName}`}
                     type="text"
                     id={fieldName}
+                    disabled={disabled}
                     name={fieldName}
                     placeholder={placeholder}
                     size="large"

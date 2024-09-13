@@ -65,7 +65,18 @@ function DashboardNavbar({ absolute = false, light = true, isMini = false }) {
   const [controller, dispatch] = useArgonController();
   const { miniSidenav, transparentNavbar, fixedNavbar, openConfigurator } = controller;
   const [openMenu, setOpenMenu] = useState(false);
+  // Get the current route from the URL path, split by '/' and remove the first empty segment
   const route = useLocation().pathname.split("/").slice(1);
+
+  // Find the index of the "update" segment in the route
+  const updateIndex = route.indexOf("update");
+
+  // Check if "update" exists in the route and if there's a segment following it
+  if (updateIndex !== -1 && updateIndex + 1 < route.length) {
+    // Remove the segment following "update", which is assumed to be a dynamic parameter like :encodedId
+    route.splice(updateIndex + 1, 1);
+  }
+  
   const { logout } = useContext(AuthContext);
   const onLogout = (e) => {
     e.preventDefault();

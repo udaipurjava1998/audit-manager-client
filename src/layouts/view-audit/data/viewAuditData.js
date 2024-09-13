@@ -82,10 +82,15 @@ import ArgonTypography from "../../../components/ArgonTypography";
 
 export function viewAuditTableData(data) {
     return {
+        filterIntialValue : {
+            sort: {},
+            filter: {}
+        },
         columns: [
             { name: "refObjectId", label: "Object ID", align: "left" },
             { name: "eventType", label: "Event Type", align: "left" },
             { name: "eventOccurence", label: "Event Occurrence", align: "center" },
+            { name: "action", label: "Actions", align: "center" },
         ],
         rows:data==null?[]: data.map((audit) => ({
             refObjectId: (
@@ -103,7 +108,8 @@ export function viewAuditTableData(data) {
                     {audit.eventOccurence}
                 </ArgonTypography>
             ),
-            subData: audit.attributeChanges
+            subData: audit.attributeChanges,
+            item:audit
         }))
     };
 }

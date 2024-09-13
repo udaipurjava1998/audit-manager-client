@@ -1,19 +1,44 @@
 
 import React from "react"
 import ArgonButton from "../../../components/ArgonButton";
-const ActionButton = ({ isOpened, onClick }) => {
+import { Grid } from "@mui/material";
+import { Link } from "react-router-dom";
+import colors from "../../../assets/theme/base/colors";
+const ActionButton = ({ isOpened, onClick, item }) => {
+    const { gradients } = colors;
 
 
     return (
+        <Grid
+            container
+            direction="row"
+            sx={{
+                justifyContent: "center",
+                alignItems: "center",
+            }}
+        >
+            <ArgonButton
+                size="small"
 
-        <ArgonButton
-            size="small"
-            sx={{ width: 40, fontSize: 10 }}
-            onClick={onClick} to={"/dev"}
-            color={isOpened ? "error" : "success"} >
-            {isOpened ? 'Close' : 'History'}
-        </ArgonButton>
+                sx={{ width: 40, fontSize: 10, mr: 2 }}
+                onClick={onClick}
+                color={isOpened ? "error" : "success"} >
+                {isOpened ? 'Close' : 'History'}
+            </ArgonButton>
 
+            <ArgonButton
+                component={Link}
+                color="info"
+                size="small"
+                sx={{
+                    width: 40,
+                    fontSize: 10,
+                }}
+                to={`/audit-log-activities/update/${btoa(`${item.id}`)}`}
+            >
+                Edit
+            </ArgonButton>
+        </Grid>
     )
 };
 

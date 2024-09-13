@@ -63,7 +63,7 @@ import config from "../../config";
 
 
 export default function Header() {
-  document.title = config.appName;
+  document.title = config.APP_NAME;
   const { state } = useContext(AuthContext);
   const [controller, dispatch] = useArgonController();
   const { miniSidenav, direction, layout, openConfigurator, sidenavColor, darkSidenav, darkMode } =

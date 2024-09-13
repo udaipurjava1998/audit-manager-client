@@ -18,7 +18,7 @@ export function ToastProvider({ children }) {
           toastPromise:(newToastPromise) => toast.promise(newToastPromise, {
             pending: {
               render(){
-                return <SimpleBackdrop></SimpleBackdrop>
+                return <SimpleBackdrop loading={true}></SimpleBackdrop>
               },
               icon: false,
             },

@@ -71,6 +71,7 @@ import DashboardLayout from "./examples/LayoutContainers/DashboardLayout";
 import { Checklist, ImportExport, Schedule, Storage, VerifiedUser } from "@mui/icons-material";
 import ViewAuditHome from "./layouts/view-audit/ViewAuditHome";
 import CreateOrUpdateAudit from "./layouts/view-audit/CreateOrUpdateAudit";
+import SessionExpired from "./layouts/authentication/SessionExpired";
 
 const menuRoutes = [
   {
@@ -135,11 +136,25 @@ const routes = [
     component: <Login />,
   },
   {
+    name: "Session Expired",
+    key: "session-expired",
+    route: "/authentication/session-expired",
+    component: <SessionExpired />,
+  },
+  {
     name: "Audit Planning Module",
     key: "audit-log-activities",
     route: "/audit-log-activities/create",
     component: <CreateOrUpdateAudit />,
   },
+  {
+    name: "Audit Planning Module",
+    key: "audit-log-activities",
+    route: "/audit-log-activities/update/:encodedId",
+    component: <CreateOrUpdateAudit />,
+  },
+
+  
 ];
 
 export default routes;

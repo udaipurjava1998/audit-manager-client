@@ -1,6 +1,7 @@
 import React from "react";
 import { Skeleton, TableContainer, TableRow, TableCell, TableBody, Box } from "@mui/material";
 import { Table as MuiTable } from "@mui/material";
+import config from "../../../config";
 
 function ViewAuditTableSkeleton({ columns }) {
   const renderSkeletonColumns = columns.map(({ name, align }, key) => {
@@ -26,7 +27,7 @@ function ViewAuditTableSkeleton({ columns }) {
     );
   });
 
-  const renderSkeletonRows = new Array(5).fill().map((_, index) => (
+  const renderSkeletonRows = new Array(config.DEFAULT_SIZE_PAGE).fill().map((_, index) => (
     <TableRow key={index}>
       {columns.map((column, key) => (
         <TableCell key={key}>

@@ -21,9 +21,9 @@ instance.interceptors.response.use(
       window.location.href = process.env.REACT_APP_PUBLIC_URL+"/access-denied";
     } else {
       switch (error.response.status) {
-        // case 401:
-        //   window.location.href = process.env.REACT_APP_PUBLIC_URL+"/auth/logout";
-        //   break;
+        case 401:
+          window.location.href = "/authentication/session-expired";
+          break;
         case 403:
           message = "Access Forbidden";
           break;

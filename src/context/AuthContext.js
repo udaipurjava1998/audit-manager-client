@@ -56,6 +56,7 @@ export const ContextProvider = props => {
     localStorage.removeItem('encodedCredentials');
     localStorage.removeItem('userDetail');
     window.location.href = "/authentication/sign-in";
+    // window.history.replaceState(null, null, "/authentication/sign-in");
 
   }
 

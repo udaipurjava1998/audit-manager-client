@@ -8,14 +8,17 @@ import React, { useMemo, useState } from "react";
 
 // uuid is a library for generating unique id
 import { v4 as uuidv4 } from "uuid";
-import { Collapse, TableBody, TableContainer, TableRow } from "@mui/material";
+import { Collapse, Pagination, PaginationItem, TableBody, TableContainer, TableRow } from "@mui/material";
 import typography from "../../../assets/theme/base/typography";
 import borders from "../../../assets/theme/base/borders";
 // @mui material components
 import { Table as MuiTable } from "@mui/material";
 import ActionButton from "./ActionButton";
 import SubTable from "./SubTable";
-function ViewAuditTable({ columns, rows }) {
+import { ArrowBack, ArrowForward } from "@mui/icons-material";
+import pxToRem from "../../../assets/theme/functions/pxToRem";
+import ServerSidePagination from "../../../components/ServerSidePagination";
+function ViewAuditTable({ columns, rows,data,setPageNo }) {
     const { size, fontWeightBold } = typography;
     const { borderWidth } = borders;
 
@@ -39,8 +42,8 @@ function ViewAuditTable({ columns, rows }) {
                 pl={align === "left" ? pl : 3}
                 pr={align === "right" ? pr : 3}
                 textAlign={align}
-                fontSize={size.xxs}
-                fontWeight={fontWeightBold}
+                fontSize={pxToRem(14)}
+                fontWeight={typography.fontWeightBold}
                 color="secondary"
                 opacity={0.7}
                 sx={({ palette: { light } }) => ({ borderBottom: `${borderWidth[1]} solid ${light.main}` })}
@@ -96,7 +99,9 @@ function ViewAuditTable({ columns, rows }) {
                             color="secondary"
                             sx={{ display: "inline-block", width: "max-content" }}
                         >
-                            {row[name]}
+                            {name === "action" ? <ArgonBox component="td" p={1} textAlign="center">
+                                <ActionButton isOpened={expandedRow === rowKey} onClick={() => handleExpandClick(rowKey)} item={row.item} />
+                            </ArgonBox> : row[name]}
                         </ArgonTypography>
                     </ArgonBox>
                 );
@@ -109,9 +114,6 @@ function ViewAuditTable({ columns, rows }) {
             <React.Fragment key={rowKey}>
                 <TableRow>
                     {tableRow}
-                    <ArgonBox component="td" p={1} textAlign="center">
-                        <ActionButton isOpened={expandedRow === rowKey} onClick={() => handleExpandClick(rowKey)} />
-                    </ArgonBox>
                 </TableRow>
                 <TableRow>
                     <ArgonBox component="td" colSpan={columns.length + 1}>
@@ -120,6 +122,7 @@ function ViewAuditTable({ columns, rows }) {
                         </Collapse>
                     </ArgonBox>
                 </TableRow>
+               
             </React.Fragment>
         );
     });
@@ -133,6 +136,7 @@ function ViewAuditTable({ columns, rows }) {
                     </ArgonBox>
                     <TableBody>{renderRows}</TableBody>
                 </MuiTable>
+                <ServerSidePagination data={data} setPageNo={setPageNo} />
             </TableContainer>
         ),
         [columns, rows, expandedRow]

@@ -10,16 +10,19 @@ import AuditObjectChangeTrackerServiceAPI from "../../rest-services/audit-object
 import ViewAuditTableSkeleton from "./components/ViewAuditTableSkeleton";
 import ArgonButton from "../../components/ArgonButton";
 import { Link } from "react-router-dom";
+import FadeInComponent from "../../components/FadeInComponent";
 
 const ViewAuditHome = (props) => {
     const [response, setResponse] = React.useState(null);
     const [loading, setLoading] = React.useState(false);
-    const { columns, rows } = viewAuditTableData(response != null ? response.data : []);
+    const { columns, rows,filterIntialValue } = viewAuditTableData(response != null ? response.data.content : []);
+    const [pageNo, setPageNo] = React.useState(1)
+    const [filter, setFilter] = React.useState(filterIntialValue);
     React.useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const response = await AuditObjectChangeTrackerServiceAPI.findAll()
+                const response = await AuditObjectChangeTrackerServiceAPI.findPagable(pageNo)
                 setResponse(response)
             } catch (e) {
 
@@ -28,7 +31,7 @@ const ViewAuditHome = (props) => {
             }
         }
         fetchData()
-    }, [])
+    }, [pageNo])
     return (
         <>
             <DashboardLayout>
@@ -49,7 +52,15 @@ const ViewAuditHome = (props) => {
                                         },
                                     },
                                 }}
-                            >{loading ? <ViewAuditTableSkeleton columns={columns} /> : <ViewAuditTable columns={columns} rows={rows} />}</ArgonBox>
+                            >
+                                <FadeInComponent
+                                    visible={loading}
+                                    child={<ViewAuditTableSkeleton columns={columns} />}
+                                    replacement={<div>
+                                        <ViewAuditTable columns={columns} rows={rows} data={response && response.data} setPageNo={setPageNo} />
+                                    </div>}
+                                />
+                            </ArgonBox>
                         </Card>
                     </ArgonBox>
                 </ArgonBox>
