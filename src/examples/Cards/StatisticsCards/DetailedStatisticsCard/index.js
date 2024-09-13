@@ -28,7 +28,12 @@ import ArgonTypography from "../../../../components/ArgonTypography";
 // Argon Dashboard 2 MUI contexts
 import { useArgonController } from "../../../../context";
 
-function DetailedStaticsCard({ bgColor, title, count, percentage, icon, direction }) {
+function DetailedStaticsCard({ bgColor = "white", title, count, percentage = {
+  color: "success",
+  count: 0,
+  text: "",
+},
+  direction = "right", centage, icon }) {
   const [controller] = useArgonController();
   const { darkMode } = controller;
 
@@ -61,7 +66,7 @@ function DetailedStaticsCard({ bgColor, title, count, percentage, icon, directio
                     <ArgonBox
                       fontSize="1.125rem"
                       display="grid"
-                      placeItems="center"
+                      placeitems="center"
                       color="inherit"
                     >
                       {icon.component}
@@ -112,7 +117,7 @@ function DetailedStaticsCard({ bgColor, title, count, percentage, icon, directio
                     <ArgonBox
                       fontSize="1.125rem"
                       display="grid"
-                      placeItems="center"
+                      placeitems="center"
                       color="inherit"
                     >
                       {icon.component}
@@ -147,15 +152,15 @@ function DetailedStaticsCard({ bgColor, title, count, percentage, icon, directio
 }
 
 // Setting default values for the props of DetailedStaticsCard
-DetailedStaticsCard.defaultProps = {
-  bgColor: "white",
-  percentage: {
-    color: "success",
-    count: 0,
-    text: "",
-  },
-  direction: "right",
-};
+// DetailedStaticsCard.defaultProps = {
+//   bgColor: "white",
+//   percentage: {
+//     color: "success",
+//     count: 0,
+//     text: "",
+//   },
+//   direction: "right",
+// };
 
 // Typechecking props for the DetailedStaticsCard
 DetailedStaticsCard.propTypes = {
