@@ -139,7 +139,7 @@ function ViewAuditTable({ columns, rows,data,setPageNo }) {
                 <ServerSidePagination data={data} setPageNo={setPageNo} />
             </TableContainer>
         ),
-        [columns, rows, expandedRow]
+        [data,setPageNo,renderColumns,renderRows]
     );
 }
 

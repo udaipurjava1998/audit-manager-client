@@ -28,7 +28,7 @@ import PageLayout from "../../../../examples/LayoutContainers/PageLayout";
 import ArgonBox from "../../../../components/ArgonBox";
 import ArgonTypography from "../../../../components/ArgonTypography";
 
-function IllustrationLayout({ color, header, title, description, button, illustration, children }) {
+function IllustrationLayout({ color = "info", header = "", title = "", description = "", button = { color: "info" }, illustration= { }, children }) {
   return (
     <PageLayout background="white">
       {/* <DefaultNavbar
@@ -119,14 +119,14 @@ function IllustrationLayout({ color, header, title, description, button, illustr
 }
 
 // Setting default values for the props of IllustrationLayout
-IllustrationLayout.defaultProps = {
-  color: "info",
-  header: "",
-  title: "",
-  description: "",
-  button: { color: "info" },
-  illustration: {},
-};
+// IllustrationLayout.defaultProps = {
+//   color: "info",
+//   header: "",
+//   title: "",
+//   description: "",
+//   button: { color: "info" },
+//   illustration: {},
+// };
 
 // Typechecking props for the IllustrationLayout
 IllustrationLayout.propTypes = {

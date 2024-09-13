@@ -62,7 +62,7 @@ function GradientLineChart({ title, description, height, chart }) {
       : [];
 
     setChartData(configs(chart.labels || [], chartDatasets));
-  }, [chart]);
+  }, [chart,data, options]);
 
   const renderChart = (
     <ArgonBox p={2}>
@@ -86,7 +86,7 @@ function GradientLineChart({ title, description, height, chart }) {
             <Line data={data} options={options} />
           </ArgonBox>
         ),
-        [chartData, height]
+        [height,data, options ]
       )}
     </ArgonBox>
   );

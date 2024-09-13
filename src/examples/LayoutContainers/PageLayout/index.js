@@ -29,7 +29,7 @@ import ArgonBox from "../../../components/ArgonBox";
 import { useArgonController,setLayout } from "../../../context";
 
 
-function PageLayout({ background, children }) {
+function PageLayout({ background="default", children }) {
   const [controller, dispatch] = useArgonController();
   const { darkMode } = controller;
 
@@ -37,7 +37,7 @@ function PageLayout({ background, children }) {
 
   useEffect(() => {
     setLayout(dispatch, "page");
-  }, [pathname]);
+  }, [pathname,dispatch]);
 
   return (
     <ArgonBox
@@ -53,9 +53,9 @@ function PageLayout({ background, children }) {
 }
 
 // Setting default values for the props for PageLayout
-PageLayout.defaultProps = {
-  background: "default",
-};
+// PageLayout.defaultProps = {
+//   background: "default",
+// };
 
 // Typechecking props for the PageLayout
 PageLayout.propTypes = {

@@ -30,7 +30,7 @@ import PageLayout from "examples/LayoutContainers/PageLayout";
 // Authentication layout components
 import Footer from "layouts/authentication/components/Footer";
 
-function CoverLayout({ title, description, image, imgPosition, button, children }) {
+function CoverLayout({ title= "",description= "",imgPosition= "center",button= { color: "white" }, children }) {
   return (
     <PageLayout>
       <ArgonBox mt={1}>
@@ -94,12 +94,12 @@ function CoverLayout({ title, description, image, imgPosition, button, children 
 }
 
 // Setting default values for the props of CoverLayout
-CoverLayout.defaultProps = {
-  title: "",
-  description: "",
-  imgPosition: "center",
-  button: { color: "white" },
-};
+// CoverLayout.defaultProps = {
+//   title: "",
+//   description: "",
+//   imgPosition: "center",
+//   button: { color: "white" },
+// };
 
 // Typechecking props for the CoverLayout
 CoverLayout.propTypes = {

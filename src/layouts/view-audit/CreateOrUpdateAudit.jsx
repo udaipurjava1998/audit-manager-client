@@ -49,7 +49,7 @@ const CreateOrUpdateAudit = (props) => {
             fetchData()
         }
        
-    }, [])
+    }, [decodedId])
 
     const isCreated = () => {
         return objectTrackerData.id !== null;
