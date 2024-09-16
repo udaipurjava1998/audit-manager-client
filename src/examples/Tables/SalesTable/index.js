@@ -32,6 +32,7 @@ import ArgonBox from "../../../components/ArgonBox";
 
 // Argon Dashboard 2 MUI example components
 import SalesTableCell from "./SalesTableCell";
+import { Card } from "@mui/material";
 
 function SalesTable({ title,  rows= [{}] }) {
   const renderTableCells = rows.map((row, key) => {
@@ -63,10 +64,11 @@ function SalesTable({ title,  rows= [{}] }) {
   });
 
   return (
+    <Card>
     <TableContainer sx={{ height: "100%" }}>
       <Table>
         <TableHead>
-          <ArgonBox component="tr" width="max-content" display="block" mb={1.5}>
+          <ArgonBox component="tr" width="max-content" display="block" mb={4.5}>
             <ArgonTypography variant="h6" component="td">
               {title}
             </ArgonTypography>
@@ -75,6 +77,7 @@ function SalesTable({ title,  rows= [{}] }) {
         <TableBody>{useMemo(() => renderTableCells, [renderTableCells])}</TableBody>
       </Table>
     </TableContainer>
+    </Card>
   );
 }
 

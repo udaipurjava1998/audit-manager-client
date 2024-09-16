@@ -29,7 +29,7 @@ import Footer from "../../examples/Footer";
 import DetailedStatisticsCard from "../../examples/Cards/StatisticsCards/DetailedStatisticsCard";
 import SalesTable from "../../examples/Tables/SalesTable";
 import CategoriesList from "../../examples/Lists/CategoriesList";
-import GradientLineChart from "../../examples/Charts/LineCharts/GradientLineChart";
+// import GradientLineChart from "../../examples/Charts/LineCharts/GradientLineChart";
 
 // Argon Dashboard 2 MUI base styles
 import typography from "../../assets/theme/base/typography";
@@ -38,7 +38,7 @@ import typography from "../../assets/theme/base/typography";
 import Slider from "./components/Slider";
 
 // Data
-import gradientLineChartData from "./data/gradientLineChartData";
+// import gradientLineChartData from "./data/gradientLineChartData";
 import salesTableData from "./data/salesTableData";
 import categoriesListData from "./data/categoriesListData";
 
@@ -83,9 +83,9 @@ function Default() {
             />
           </Grid>
         </Grid>
-        <Grid container spacing={3} mb={3}>
+        <Grid container spacing={3} mb={1}>
           <Grid item xs={12} lg={7}>
-            <GradientLineChart
+            {/* <GradientLineChart
               title="Sales Overview"
               description={
                 <ArgonBox display="flex" alignItems="center">
@@ -101,10 +101,10 @@ function Default() {
                 </ArgonBox>
               }
               chart={gradientLineChartData}
-            />
+            /> */}
           </Grid>
           <Grid item xs={12} lg={5}>
-            <Slider />
+            {/* <Slider /> */}
           </Grid>
         </Grid>
         <Grid container spacing={3}>
