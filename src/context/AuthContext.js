@@ -33,7 +33,7 @@ export const ContextProvider = props => {
       localStorage.setItem('userDetail', JSON.stringify(res));
       localStorage.setItem('encodedCredentials', res['accessToken']);
       setUser(res)
-      window.location.href = "/dashboard";
+      window.location.href = `${process.env.REACT_APP_HOMEPAGE}/dashboard`;
       // Check authorization code with backend API
     } catch (error) {
 
@@ -55,7 +55,7 @@ export const ContextProvider = props => {
     // Remove the access token from the browser's local storage
     localStorage.removeItem('encodedCredentials');
     localStorage.removeItem('userDetail');
-    window.location.href = "/authentication/sign-in";
+    window.location.href = `${process.env.REACT_APP_HOMEPAGE}/authentication/sign-in`;
     // window.history.replaceState(null, null, "/authentication/sign-in");
 
   }

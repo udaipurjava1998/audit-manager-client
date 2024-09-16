@@ -18,11 +18,11 @@ instance.interceptors.response.use(
     if (error && error.response && error.response.status === 404) {
       // window.location.href = '/not-found';
     } else if (error && error.response && error.response.status === 403) {
-      window.location.href = process.env.REACT_APP_PUBLIC_URL+"/access-denied";
+      window.location.href = process.env.REACT_APP_HOMEPAGE+"/access-denied";
     } else {
       switch (error.response.status) {
         case 401:
-          window.location.href = "/authentication/session-expired";
+          window.location.href = `${process.env.REACT_APP_HOMEPAGE}/authentication/session-expired`;
           break;
         case 403:
           message = "Access Forbidden";
