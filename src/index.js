@@ -9,6 +9,7 @@ import { ToastProvider } from './components/toast/Toast';
 import { DialogProvider } from './context/DialogProvider';
 import { ArgonControllerProvider } from './context';
 import { BrowserRouter } from "react-router-dom";
+import history from './history';
 const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
@@ -17,7 +18,7 @@ root.render(
       <ToastProvider>
         <DialogProvider>
           <ArgonControllerProvider>
-            <BrowserRouter>
+            <BrowserRouter basename={process.env.REACT_APP_HOMEPAGE}  history={history}>
               <App />
             </BrowserRouter>
           
