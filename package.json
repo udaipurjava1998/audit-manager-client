@@ -43,6 +43,8 @@
     "eject": "react-scripts eject",
     "build:dev": "env-cmd -f ./.dev.env npm run-script build",
     "start:dev": "env-cmd -f ./.dev.env npm run-script start",
+    "build:sit": "env-cmd -f ./.sit.env npm run-script build",
+    "start:sit": "env-cmd -f ./.sit.env npm run-script start",
     "build:prod": "env-cmd -f ./.prod.env npm run-script build",
     "start:prod": "env-cmd -f ./.prod.env npm run-script start",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start"
