@@ -45,20 +45,45 @@ const CreateOrUpdateAudit = (props) => {
             }
             setloading(false)
         }
-        if(decodedId!=null){
+        if (decodedId != null) {
             fetchData()
         }
-       
+
     }, [decodedId])
 
-    const isCreated = () => {
+    const isCreatedObjectTracker = () => {
         return objectTrackerData.id !== null;
+    }
+    const isCreatedAttributeTracker = () => {
+        return attributeTrackerData.id !== null;
     }
     const removeByIndex = (indexToRemove) => {
         setSubData((prevData) =>
             prevData.filter((_, index) => index !== indexToRemove)
         );
     };
+    const setSubDataValue=()=>{
+        setSubData((previousValue) => {
+
+            var updatedArray = [...previousValue];
+
+            // Ensure the index exists before updating
+            if (attributeTrackerData.index!=null) {
+                updatedArray = [
+                    ...updatedArray.slice(0, attributeTrackerData.index),
+                    attributeTrackerData,
+                    ...updatedArray.slice(attributeTrackerData.index)
+                ];
+            } else {
+                updatedArray.push(attributeTrackerData); // Push to the end if the index doesn't exist
+            }
+
+            return updatedArray;
+        });
+
+        setAttributeTrackerData(initialTempAttibuteData);
+
+    }
     const getActions = (item, index) => {
         return (
             <TableCell sx={{ padding: subTablePaddingSize, textAlign: 'center' }}>
@@ -72,11 +97,14 @@ const CreateOrUpdateAudit = (props) => {
                     }}
                 >
 
-                    <Edit color="warning" onClick={() => {
-                        var seletedItem = subData[index];
-                        seletedItem.index = index
-                        setAttributeTrackerData(seletedItem)
-                        removeByIndex(index);
+                    <Edit color={isCreatedAttributeTracker() ? "disabled" : "warning"} onClick={() => {
+                        if (!isCreatedAttributeTracker()) {
+                            var seletedItem = subData[index];
+                            seletedItem.index = index
+                            setAttributeTrackerData(seletedItem)
+                            removeByIndex(index);
+                        }
+
                     }} />
                     {/* <Delete onClick={() => {
                         removeByIndex(index)
@@ -118,7 +146,7 @@ const CreateOrUpdateAudit = (props) => {
                                             }
                                         }}
                                             sx={{ width: 30 }}
-                                            color={"success"}>{isCreated() ? "Update" : "Save"}</ArgonButton>
+                                            color={"success"}>{isCreatedObjectTracker() ? "Update" : "Save"}</ArgonButton>
                                     </Grid>
 
                                 </Grid>
@@ -168,52 +196,54 @@ const CreateOrUpdateAudit = (props) => {
                             </Grid>
                         </ArgonBox>
                         <ArgonBox display="flex" justifyContent="space-between" alignItems="center" p={2} >
-                            <ArgonTypography variant="h6">Add Audit Attribute Tracker</ArgonTypography>
-                            <Tooltip title={isCreated() ? "" : "Please Save Audit first"}>
-                                <div>
-                                    <ArgonButton
-                                        onClick={async () => {
-                                            if (await attributeTrackerValidator.validateForm()) {
-                                                console.log("Adding attribute:", attributeTrackerData);
-                                                attributeTrackerData.auditObjectChangeTrackerId = objectTrackerData.id
-                                                var response = await AuditAttributeChangeTrackerServiceAPI.createAuditAttributeChangeTracker(attributeTrackerData);
+                            <Grid item xs={8}>
+                                <ArgonTypography variant="h6">Add Audit Attribute Tracker</ArgonTypography>
+                            </Grid>
+                            <Grid item xs={4} container spacing={2} justifyContent="flex-end">
+                                <Grid item>
+                                    <Tooltip title={isCreatedObjectTracker() ? "" : "Please Save Audit first"}>
+                                        <div>
+                                            <ArgonButton
+                                                onClick={async () => {
+                                                    if (await attributeTrackerValidator.validateForm()) {
+                                                        console.log("Adding attribute:", attributeTrackerData);
+                                                        attributeTrackerData.auditObjectChangeTrackerId = objectTrackerData.id
+                                                        var response = await AuditAttributeChangeTrackerServiceAPI.createAuditAttributeChangeTracker(attributeTrackerData);
 
-                                                toastWithCommonResponse(response)
-                                                if (response.status === 200) {
-                                                    attributeTrackerData.id = response.data.id;
-                                                    setSubData((previousValue) => {
+                                                        toastWithCommonResponse(response)
+                                                        if (response.status === 200) {
+                                                            attributeTrackerData.id = response.data.id;
+                                                           
+                                                           setSubDataValue()
 
-                                                        var updatedArray = [...previousValue];
-
-                                                        // Ensure the index exists before updating
-                                                        if (attributeTrackerData.index) {
-                                                            updatedArray = [
-                                                                ...updatedArray.slice(0, attributeTrackerData.index),
-                                                                attributeTrackerData,
-                                                                ...updatedArray.slice(attributeTrackerData.index)
-                                                            ];
-                                                        } else {
-                                                            updatedArray.push(attributeTrackerData); // Push to the end if the index doesn't exist
                                                         }
 
-                                                        return updatedArray;
-                                                    });
+                                                    }
+                                                }}
+                                                sx={{ width: 30 }}
+                                                disabled={!isCreatedObjectTracker()}
+                                                color={"success"}
+                                            >
+                                                {!isCreatedAttributeTracker() ? 'Add' : 'Update'}
+                                            </ArgonButton>
+                                        </div>
+                                    </Tooltip>
+                                </Grid>
+                                <Grid item>
+                                   {isCreatedAttributeTracker() && <ArgonButton
 
-                                                    setAttributeTrackerData(initialTempAttibuteData);
-
-                                                }
-
-                                            }
+                                        onClick={()=>{
+                                            setSubDataValue()
                                         }}
-                                        sx={{ width: 30 }}
-                                        disabled={!isCreated()}
-                                        color={"success"}
-                                    >
-                                        {attributeTrackerData.id === null ? 'Add' : 'Update'}
-                                    </ArgonButton>
-                                </div>
-                            </Tooltip>
 
+                                        sx={{ width: 30 }}
+                                        disabled={!isCreatedObjectTracker()}
+                                        color={"error"}
+                                    >
+                                        Cancel
+                                    </ArgonButton>}
+                                </Grid>
+                            </Grid>
                         </ArgonBox>
                         <ArgonBox
                             px={4}
@@ -241,7 +271,7 @@ const CreateOrUpdateAudit = (props) => {
                                     alignItems: "start",
                                 }}>
                                 <AttributeInputField
-                                    disabled={!isCreated()}
+                                    disabled={!isCreatedObjectTracker()}
                                     placeholder={"Attribute Name"}
                                     value={attributeTrackerData.attributeName}
                                     fieldName={"attributeName"}
@@ -249,21 +279,21 @@ const CreateOrUpdateAudit = (props) => {
                                 />
 
                                 <AttributeInputField
-                                    disabled={!isCreated()}
+                                    disabled={!isCreatedObjectTracker()}
                                     placeholder={"Old Value"}
                                     value={attributeTrackerData.oldValue}
                                     fieldName={"oldValue"}
                                     validator={attributeTrackerValidator}
                                 />
                                 <AttributeInputField
-                                    disabled={!isCreated()}
+                                    disabled={!isCreatedObjectTracker()}
                                     placeholder={"New Value"}
                                     value={attributeTrackerData.newValue}
                                     fieldName={"newValue"}
                                     validator={attributeTrackerValidator}
                                 />
                                 <AttributeInputField
-                                    disabled={!isCreated()}
+                                    disabled={!isCreatedObjectTracker()}
                                     placeholder={"Changed By"}
                                     value={attributeTrackerData.changedBy}
                                     fieldName={"changedBy"}
