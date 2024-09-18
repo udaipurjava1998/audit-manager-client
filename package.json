@@ -39,6 +39,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "postbuild": "mkdirp build/WEB-INF && copyfiles web.xml build/WEB-INF",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build:dev": "env-cmd -f ./.dev.env npm run-script build",
@@ -47,7 +48,7 @@
     "start:sit": "env-cmd -f ./.sit.env npm run-script start",
     "build:prod": "env-cmd -f ./.prod.env npm run-script build",
     "start:prod": "env-cmd -f ./.prod.env npm run-script start",
-    "deploy:windows":"xcopy build\\* C:\\xampp\\htdocs\\audit-manager\\ /E /H /C /I",
+    "deploy:windows": "xcopy build\\* C:\\xampp\\htdocs\\audit-manager\\ /E /H /C /I",
     "deploy:linux": "cp -r build/* /var/www/html/audit-manager/",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start"
   },
@@ -75,6 +76,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "copyfiles": "^2.4.1",
     "env-cmd": "^10.1.0",
     "eslint": "8.40.0",
     "eslint-config-prettier": "8.8.0",
@@ -82,6 +84,7 @@
     "eslint-plugin-prettier": "4.2.1",
     "eslint-plugin-react": "7.32.2",
     "eslint-plugin-react-hooks": "4.6.0",
+    "mkdirp": "^3.0.1",
     "prettier": "2.8.8"
   },
   "overrides": {

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const instance = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL, // Replace with your backend server URL
@@ -14,15 +15,17 @@ instance.interceptors.response.use(
   (error) => {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     let message;
-  
+    //const navigate = useNavigate();
     if (error && error.response && error.response.status === 404) {
       // window.location.href = '/not-found';
     } else if (error && error.response && error.response.status === 403) {
-      window.location.href = process.env.REACT_APP_HOMEPAGE+"/access-denied";
+      // window.location.href = process.env.REACT_APP_HOMEPAGE+"/access-denied";
+     // navigate('/access-denied')
     } else {
       switch (error.response.status) {
         case 401:
-          window.location.href = `${process.env.REACT_APP_HOMEPAGE}/authentication/session-expired`;
+           window.location.href = `http://localhost:8080/audit-manager/authentication/session-expired`;
+          //navigate('/authentication/session-expired')
           break;
         case 403:
           message = "Access Forbidden";

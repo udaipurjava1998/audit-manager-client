@@ -2,6 +2,7 @@ import React from 'react';
 import { useSetState } from 'react-use';
 import UserService from '../rest-services/UserService';
 import { useUser } from './UserContext';
+import { useNavigate } from 'react-router-dom';
 export const AuthContext = React.createContext("Default");
 const initialState = {
   isLoggedIn: localStorage.getItem('encodedCredentials')!=null,
@@ -11,7 +12,7 @@ const initialState = {
 
 export const ContextProvider = props => {
   const {setUser } = useUser();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [state, setState] = useSetState(initialState);
   const setLoginPending = (isLoginPending) => setState({ isLoginPending });
   const setLoginSuccess = (isLoggedIn) => setState({ isLoggedIn });
@@ -33,7 +34,8 @@ export const ContextProvider = props => {
       localStorage.setItem('userDetail', JSON.stringify(res));
       localStorage.setItem('encodedCredentials', res['accessToken']);
       setUser(res)
-      window.location.href = `${process.env.REACT_APP_HOMEPAGE}/dashboard`;
+      // window.location.href = `${process.env.REACT_APP_HOMEPAGE}/dashboard`;
+      navigate('/dashboard')
       // Check authorization code with backend API
     } catch (error) {
 
@@ -55,7 +57,8 @@ export const ContextProvider = props => {
     // Remove the access token from the browser's local storage
     localStorage.removeItem('encodedCredentials');
     localStorage.removeItem('userDetail');
-    window.location.href = `${process.env.REACT_APP_HOMEPAGE}/authentication/sign-in`;
+    // window.location.href = `${process.env.REACT_APP_HOMEPAGE}/authentication/sign-in`;
+    navigate('/authentication/sign-in')
     // window.history.replaceState(null, null, "/authentication/sign-in");
 
   }
