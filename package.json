@@ -48,7 +48,7 @@
     "start:sit": "env-cmd -f ./.sit.env npm run-script start",
     "build:prod": "env-cmd -f ./.prod.env npm run-script build",
     "start:prod": "env-cmd -f ./.prod.env npm run-script start",
-    "deploy:windows": "xcopy build\\* C:\\xampp\\htdocs\\audit-manager\\ /E /H /C /I",
+    "deploy:windows": "xcopy build\\* C:\\Workspace\\software\\apache-tomcat-9.0.95\\webapps\\audit-manager\\ /E /H /C /I",
     "deploy:linux": "cp -r build/* /var/www/html/audit-manager/",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start"
   },
