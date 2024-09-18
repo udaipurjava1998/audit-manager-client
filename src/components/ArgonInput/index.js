@@ -25,7 +25,7 @@ import ArgonInputRoot from "./ArgonInputRoot";
 // Argon Dashboard 2 MUI context
 import { useArgonController } from "../../context";
 import { FormControl, FormHelperText } from "@mui/material";
-const ArgonInput = forwardRef(({ size, error, success, disabled,helperText, ...rest }, ref) => {
+export const ArgonInput = forwardRef(({ size, error, success, disabled,helperText, ...rest }, ref) => {
   const [controller] = useArgonController();
   const { darkMode } = controller;
 
