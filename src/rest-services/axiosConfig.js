@@ -24,7 +24,7 @@ instance.interceptors.response.use(
     } else {
       switch (error.response.status) {
         case 401:
-           window.location.href = `http://localhost:8080/audit-manager/authentication/session-expired`;
+           window.location.href = `${process.env.REACT_APP_HOMEPAGE}/authentication/session-expired`;
           //navigate('/authentication/session-expired')
           break;
         case 403:
