@@ -71,6 +71,8 @@ import DashboardLayout from "./examples/LayoutContainers/DashboardLayout";
 import { Checklist, ImportExport, Schedule, Storage, VerifiedUser } from "@mui/icons-material";
 import ViewAuditHome from "./layouts/view-audit/ViewAuditHome";
 import CreateOrUpdateAudit from "./layouts/view-audit/CreateOrUpdateAudit";
+import CreateOrUpdateUser from "./layouts/view-user/CreateOrUpdateUser";
+import ViewUserHome from "./layouts/view-user/ViewUserHome";
 import SessionExpired from "./layouts/authentication/SessionExpired";
 
 const menuRoutes = [
@@ -96,7 +98,7 @@ const menuRoutes = [
     key: "master-data-management",
     route: "/master-data-management",
     icon: <Storage color="primary" fontSize="14px"></Storage>    ,
-    component:  <DashboardLayout><></></DashboardLayout>,
+    component:  <ViewUserHome><></></ViewUserHome>,
   },
   {
     type: "route",
@@ -153,7 +155,18 @@ const routes = [
     route: "/audit-log-activities/update/:encodedId",
     component: <CreateOrUpdateAudit />,
   },
-
+  {
+    name: "Master Data Management Module",
+    key: "master-data-management",
+    route: "/master-data-management/create",
+    component: <CreateOrUpdateUser />,
+  },
+  {
+    name: "Master Data Management Module",
+    key: "master-data-management",
+    route: "/master-data-management/update/:encodedId",
+    component: <CreateOrUpdateUser />,
+  }
   
 ];
 

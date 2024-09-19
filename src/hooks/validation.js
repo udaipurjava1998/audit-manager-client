@@ -1,3 +1,4 @@
+
 export const ValidationRuleNames = {
   isRequired: "isRequired",
   maxLength: "maxLength",
@@ -7,10 +8,12 @@ export const ValidationRuleNames = {
   isFloat: "isFloat",
   customValidation: "customValidation",
   compare: "compare",
-  customValidationAsync: "customValidationAsync"
+  customValidationAsync: "customValidationAsync",
+  isStrongPassword: "isStrongPassword",  
+  isUsernamePattern: "isUsernamePattern" 
 };
 
-const Validation = async (fieldValue, key, value) => {
+const Validation = async (fieldValue, key, value, otherFieldValue) => {
   let result;
 
   switch (key) {
@@ -50,6 +53,25 @@ const Validation = async (fieldValue, key, value) => {
         return `more than ${value} decimal points`;
       }
       break;
+
+    case ValidationRuleNames.isStrongPassword:
+        if (value) {
+          const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+          if (!strongPasswordRegex.test(fieldValue)) {
+            return "Password must be at least 8 characters long, include an uppercase letter, a number, and a special character";
+          }
+        }
+        break;
+        
+  
+    case ValidationRuleNames.isUsernamePattern:
+        if (value) {
+          const usernamePattern = /^[a-zA-Z0-9_]{5,15}$/; // Example pattern
+          if (!usernamePattern.test(fieldValue)) {
+            return "Username must be between 5 and 15 characters and may include letters, numbers, and underscores only";
+          }
+        }
+        break;
 
     case ValidationRuleNames.customValidation:
       return value(fieldValue);

@@ -8,42 +8,45 @@ export function useToast() {
     return useContext(ToastContext);
 }
 export function ToastProvider({ children }) {
- 
-    return (
-      <ToastContext.Provider 
-      value={
-        { 
-          toast: (type,message) => toast[type](message),
-          toastWithCommonResponse: (response) => toast[response.status===200?'success':'error'](response.message),
-          toastPromise:(newToastPromise) => toast.promise(newToastPromise, {
-            pending: {
-              render(){
-                return <SimpleBackdrop loading={true}></SimpleBackdrop>
-              },
-              icon: false,
-            },
-            success: {
-              render({data}){
-                return `${data.message}`
-              },
-              // other options
-              icon: "🟢",
-              
-            },
-            error: {
-              render({data}){
-                // When the promise reject, data will contains the error
-                return `${data}`
-              }
-            }
-          })  // Add toast.promise to the context value
-        }
-        }>
-        {children}
-        <ToastContainer autoClose={1000} position="bottom-right" />
+  const showSuccessToast = (message) => toast.success(message);
+  const showErrorToast = (message) => toast.error(message);
+
+  return (
+      <ToastContext.Provider
+          value={{
+              toast: (type, message) => toast[type](message),
+              toastWithCommonResponse: (response) =>
+                  toast[response.status === 200 ? 'success' : 'error'](response.message),
+              toastPromise: (newToastPromise) =>
+                  toast.promise(newToastPromise, {
+                      pending: {
+                          render() {
+                              return <SimpleBackdrop loading={true}></SimpleBackdrop>;
+                          },
+                          icon: false,
+                      },
+                      success: {
+                          render({ data }) {
+                              return `${data.message}`;
+                          },
+                          icon: '🟢',
+                      },
+                      error: {
+                          render({ data }) {
+                              return `${data}`;
+                          },
+                      },
+                  }),
+              showSuccessToast,
+              showErrorToast,
+          }}
+      >
+          {children}
+          <ToastContainer autoClose={1000} position="bottom-right" />
       </ToastContext.Provider>
-    );
+  );
 }
+
 // Function to get the toast style based on data
 // const getSuccessToastStyle = ({ data }) => {
 //   const dynamicStyle = {};
