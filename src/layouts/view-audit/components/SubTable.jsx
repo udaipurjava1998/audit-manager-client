@@ -12,7 +12,7 @@ function SubTable({ subData, gridSize = { xs: 8 }, title = "History", actions })
     const [filterText, setFilterText] = useState('');
     const [filteredData, setFilteredData] = useState(subData);
     const [pageNo,setPageNo] = useState(1);
-    const [rowsPerPage, setRowsPerPage] = useState(3);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
 
     const { size, fontWeightBold } = typography;
 

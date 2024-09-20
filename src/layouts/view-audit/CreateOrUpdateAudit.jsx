@@ -84,6 +84,8 @@ const CreateOrUpdateAudit = (props) => {
         setAttributeTrackerData(initialTempAttibuteData);
 
     }
+    //TODO  if not require need to remove
+    // eslint-disable-next-line
     const getActions = (item, index) => {
         return (
             <TableCell sx={{ padding: subTablePaddingSize, textAlign: 'center' }}>
@@ -304,7 +306,7 @@ const CreateOrUpdateAudit = (props) => {
                         </ArgonBox>
                         <SubTable
                             subData={subData}
-                            actions={getActions}
+                            //actions={getActions}
                             gridSize={{ xs: 12 }}
                             title={null}></SubTable>
                     </Card>
