@@ -13,7 +13,7 @@ const UserCreationInputField = ({ placeholder, fieldName, type, value, validator
             <ArgonBox mb={0.5}>
                 {isSelect ? (
                     
-      <FormControl sx={{ m: 1, width: 380, mt: 1 }}>
+      <FormControl sx={{ m: 0, width: 390, mt: 1 }}>
         <Select
                  value={value || ''}
                  onChange={onChange}
