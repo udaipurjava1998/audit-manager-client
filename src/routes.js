@@ -96,9 +96,18 @@ const menuRoutes = [
     type: "route",
     name: "Master Data Management",
     key: "master-data-management",
-    route: "/master-data-management",
-    icon: <Storage color="primary" fontSize="14px"></Storage>    ,
-    component:  <ViewUserHome><></></ViewUserHome>,
+    icon: <Storage color="primary" fontSize="14px" />,
+    collapse: [
+      {
+        type: "route",
+        name: "User Data Management",
+        key: "user-data",
+        route: "/master-data-management/user-data",
+        icon: <Storage color="primary" fontSize="14px" />,
+        component: <ViewUserHome><></></ViewUserHome>,
+      },
+      // Add more submenu items here if needed
+    ],
   },
   {
     type: "route",
@@ -158,7 +167,7 @@ const routes = [
   {
     name: "Master Data Management Module",
     key: "master-data-management",
-    route: "/master-data-management/create",
+    route: "/master-data-management/user-data/create",
     component: <CreateOrUpdateUser />,
   },
   {

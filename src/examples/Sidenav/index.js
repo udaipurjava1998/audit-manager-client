@@ -12,8 +12,7 @@ Coded by www.creative-tim.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
-
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 // react-router-dom components
 import { useLocation, NavLink } from "react-router-dom";
@@ -28,39 +27,31 @@ import Link from "@mui/material/Link";
 import Icon from "@mui/material/Icon";
 
 // Argon Dashboard 2 MUI components
+import Collapse from "@mui/material/Collapse";
 import ArgonBox from "../../components/ArgonBox";
 import ArgonTypography from "../../components/ArgonTypography";
 
 // Argon Dashboard 2 MUI example components
 import SidenavItem from "./SidenavItem";
-// import SidenavFooter from "./SidenavFooter";
-
-// Custom styles for the Sidenav
 import SidenavRoot from "./SidenavRoot";
-// import sidenavLogoLabel from "./styles/sidenav";
+import { useArgonController, setMiniSidenav } from "../../context";
 
-// Argon Dashboard 2 MUI context
-import { useArgonController,setMiniSidenav } from "../../context";
-import borders from "../../assets/theme/base/borders";
-
-const { borderRadius } = borders;
-
-function Sidenav({ color= "info",  brand= "", brandMini, routes, ...rest }) {
+function Sidenav({ color = "info", brand = "", brandMini, routes, ...rest }) {
   const [controller, dispatch] = useArgonController();
   const { miniSidenav, darkSidenav, layout } = controller;
   const location = useLocation();
   const { pathname } = location;
-  const itemName = pathname.split("/").slice(1)[0];
+
+  const [openSubmenu, setOpenSubmenu] = useState(null);
 
   const closeSidenav = () => setMiniSidenav(dispatch, true);
 
   useEffect(() => {
-    // A function that sets the mini state of the sidenav.
     function handleMiniSidenav() {
       setMiniSidenav(dispatch, window.innerWidth < 1200);
     }
 
-    /** 
+     /** 
      The event listener that's calling the handleMiniSidenav function when resizing the window.
     */
     window.addEventListener("resize", handleMiniSidenav);
@@ -72,26 +63,55 @@ function Sidenav({ color= "info",  brand= "", brandMini, routes, ...rest }) {
     return () => window.removeEventListener("resize", handleMiniSidenav);
   }, [dispatch, location]);
 
-  // Render all the routes from the routes.js (All the visible items on the Sidenav)
-  const renderRoutes = routes.map(({ type, name, icon, title, key, href, route }) => {
+  const handleSubmenuClick = (key, hasCollapse) => {
+    if (hasCollapse) {
+      setOpenSubmenu((prevKey) => (prevKey === key ? null : key));
+    } else {
+      setOpenSubmenu(null);
+    }
+  };
+
+  const renderRoutes = routes.map(({ type, name, icon, title, key, href, route, collapse }) => {
     let returnValue;
+    const isActive = pathname.includes(route); // Check if current pathname includes the route
 
     if (type === "route") {
-      if (href) {
+      if (collapse) {
         returnValue = (
-          <Link href={href} key={key} target="_blank" rel="noreferrer">
+          <ArgonBox key={key}>
             <SidenavItem
               name={name}
               icon={icon}
-              active={key === itemName}
-              // noCollapse={noCollapse}
+              active={isActive}
+              open={openSubmenu === key}
+              onClick={() => handleSubmenuClick(key, true)}
             />
+            <Collapse in={openSubmenu === key}>
+              <List component="div" disablePadding>
+                {collapse.map((subItem) => (
+                  <NavLink to={subItem.route} key={subItem.key}>
+                    <SidenavItem
+                      name={subItem.name}
+                      icon={subItem.icon}
+                      active={pathname === subItem.route} // Check if pathname matches the subItem route
+                      style={{ paddingLeft: "2rem" }}
+                    />
+                  </NavLink>
+                ))}
+              </List>
+            </Collapse>
+          </ArgonBox>
+        );
+      } else if (href) {
+        returnValue = (
+          <Link href={href} key={key} target="_blank" rel="noreferrer">
+            <SidenavItem name={name} icon={icon} active={isActive} />
           </Link>
         );
       } else {
         returnValue = (
-          <NavLink to={route} key={key}>
-            <SidenavItem name={name} icon={icon} active={key === itemName} />
+          <NavLink to={route} key={key} onClick={() => handleSubmenuClick(key, false)}>
+            <SidenavItem name={name} icon={icon} active={isActive} />
           </NavLink>
         );
       }
@@ -122,7 +142,7 @@ function Sidenav({ color= "info",  brand= "", brandMini, routes, ...rest }) {
 
   return (
     <SidenavRoot {...rest} variant="permanent" ownerState={{ darkSidenav, miniSidenav, layout }}>
-      <ArgonBox pt={1} pb={1} px={0.5}>
+      <ArgonBox pt={3} pb={1} px={4} textAlign="center">
         <ArgonBox
           display={{ xs: "block", xl: "none" }}
           position="absolute"
@@ -138,44 +158,27 @@ function Sidenav({ color= "info",  brand= "", brandMini, routes, ...rest }) {
         </ArgonBox>
         <ArgonBox component={NavLink} to="/" display="flex" alignItems="center">
           {brand && (
-            <ArgonBox  borderRadius ={borderRadius.xl} component="img" src={miniSidenav ?brandMini :brand} alt="Argon Logo" width={miniSidenav ?"5rem" :"15rem"} />
+            <ArgonBox
+              component="img"
+              src={miniSidenav ? brandMini : brand}
+              alt="Argon Logo"
+              width={miniSidenav ? "3rem" : "12rem"}
+              height={miniSidenav ? "3rem" : "6rem"}  
+              borderRadius="lg"
+            />
           )}
-          {/* <ArgonBox
-            width={!brandMini && "100%"}
-            sx={(theme) => sidenavLogoLabel(theme, { miniSidenav })}
-          >
-            <ArgonTypography
-              component="h6"
-              variant="button"
-              fontWeight="medium"
-              color={darkSidenav ? "white" : "dark"}
-            >
-              {brandMini}
-            </ArgonTypography>
-          </ArgonBox> */}
         </ArgonBox>
       </ArgonBox>
       <Divider light={darkSidenav} />
       <List>{renderRoutes}</List>
-
-      <ArgonBox pt={1} mt="auto" mb={2} mx={2}>
-    
-      </ArgonBox>
     </SidenavRoot>
   );
 }
 
-// // Setting default values for the props of Sidenav
-// Sidenav.defaultProps = {
-//   color: "info",
-//   brand: "",
-// };
-
-// Typechecking props for the Sidenav
 Sidenav.propTypes = {
   color: PropTypes.oneOf(["primary", "secondary", "info", "success", "warning", "error", "dark"]),
   brand: PropTypes.string,
-  brandMini: PropTypes.string.isRequired,
+  brandMini: PropTypes.string,
   routes: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
