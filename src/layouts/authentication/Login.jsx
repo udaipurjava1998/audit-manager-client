@@ -86,9 +86,9 @@ const Login = (props) => {
                 description="Enter your email and password to sign in"
                 illustration={{
                     image: bgImage,
-                    title: '"Attention is the new currency"',
+                    title: '"A system is only as strong as its ability to track change."',
                     description:
-                        "The more effortless the writing looks, the more effort the writer actually put into the process.",
+                        "Audit logs are the backbone of robust systems, capturing every crucial modification.",
                 }}
             >
                 <ArgonBox component="form" role="form" onSubmit={handleSubmit}>
