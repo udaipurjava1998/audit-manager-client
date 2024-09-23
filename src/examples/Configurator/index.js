@@ -14,18 +14,18 @@ Coded by www.creative-tim.com
 */
 
 // react-github-btn
-import GitHubButton from "react-github-btn";
+// import GitHubButton from "react-github-btn";
 
 // @mui material components
 import Divider from "@mui/material/Divider";
 import Switch from "@mui/material/Switch";
 import IconButton from "@mui/material/IconButton";
-import Link from "@mui/material/Link";
+// import Link from "@mui/material/Link";
 import Icon from "@mui/material/Icon";
 
 // @mui icons
-import TwitterIcon from "@mui/icons-material/Twitter";
-import FacebookIcon from "@mui/icons-material/Facebook";
+// import TwitterIcon from "@mui/icons-material/Twitter";
+// import FacebookIcon from "@mui/icons-material/Facebook";
 
 // Argon Dashboard 2 MUI components
 import ArgonBox from "../../components/ArgonBox";
@@ -74,7 +74,7 @@ function Configurator() {
         px={3}
       >
         <ArgonBox>
-          <ArgonTypography variant="h5">Argon Configurator</ArgonTypography>
+          <ArgonTypography variant="h5">View Configurator</ArgonTypography>
           <ArgonTypography variant="body2" color="text">
             See our dashboard options.
           </ArgonTypography>
@@ -189,7 +189,7 @@ function Configurator() {
         </ArgonBox>
 
         <ArgonBox mt={5} mb={2}>
-          <ArgonBox mb={2}>
+          {/* <ArgonBox mb={2}>
             <ArgonButton
               component={Link}
               href="https://www.creative-tim.com/product/argon-dashboard-pro-material-ui"
@@ -223,9 +223,9 @@ function Configurator() {
             fullWidth
           >
             View Documentation
-          </ArgonButton>
+          </ArgonButton> */}
         </ArgonBox>
-        <ArgonBox display="flex" justifyContent="center">
+        {/* <ArgonBox display="flex" justifyContent="center">
           <GitHubButton
             href="https://github.com/creativetimofficial/argon-dashboard-material-ui"
             data-icon="octicon-star"
@@ -265,7 +265,7 @@ function Configurator() {
               &nbsp; Share
             </ArgonButton>
           </ArgonBox>
-        </ArgonBox>
+        </ArgonBox> */}
       </ArgonBox>
     </ConfiguratorRoot>
   );

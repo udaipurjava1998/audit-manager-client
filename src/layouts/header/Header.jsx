@@ -21,11 +21,11 @@ import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 // @mui material components
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import Icon from "@mui/material/Icon";
+// import Icon from "@mui/material/Icon";
 
 // Argon Dashboard 2 MUI components
 
-import ArgonBox from "../../components/ArgonBox";
+// import ArgonBox from "../../components/ArgonBox";
 
 // Argon Dashboard 2 MUI example components
 // import Sidenav from "examples/Sidenav";
@@ -46,7 +46,7 @@ import themeDark from "../../assets/theme-dark";
 import routes from "../../routes";
 
 // Argon Dashboard 2 MUI contexts
-import { useArgonController, setMiniSidenav, setOpenConfigurator } from "../../context";
+import { useArgonController, setMiniSidenav } from "../../context";
 // Images
 import brand from "../../assets/images/logo-ct.png";
 import brandMini from "../../assets/images/logo-ct-mini.png";
@@ -66,7 +66,7 @@ export default function Header() {
   document.title = config.APP_NAME;
   const { state } = useContext(AuthContext);
   const [controller, dispatch] = useArgonController();
-  const { miniSidenav, direction, layout, openConfigurator, sidenavColor, darkSidenav, darkMode } =
+  const { miniSidenav, direction, layout, sidenavColor, darkSidenav, darkMode } =
     controller;
   const [onMouseEnter, setOnMouseEnter] = useState(false);
   // const [rtlCache, setRtlCache] = useState(null);
@@ -99,7 +99,7 @@ export default function Header() {
   };
 
   // Change the openConfigurator state
-  const handleConfiguratorOpen = () => setOpenConfigurator(dispatch, !openConfigurator);
+  // const handleConfiguratorOpen = () => setOpenConfigurator(dispatch, !openConfigurator);
 
   // Setting the dir attribute for the body element
   useEffect(() => {
@@ -125,29 +125,29 @@ export default function Header() {
       return null;
     });
 
-  const configsButton = (
-    <ArgonBox
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      width="3.5rem"
-      height="3.5rem"
-      bgColor="white"
-      shadow="sm"
-      borderRadius="50%"
-      position="fixed"
-      right="2rem"
-      bottom="2rem"
-      zIndex={99}
-      color="dark"
-      sx={{ cursor: "pointer" }}
-      onClick={handleConfiguratorOpen}
-    >
-      <Icon fontSize="default" color="inherit">
-        settings
-      </Icon>
-    </ArgonBox>
-  );
+  // const configsButton = (
+  //   <ArgonBox
+  //     display="flex"
+  //     justifyContent="center"
+  //     alignItems="center"
+  //     width="3.5rem"
+  //     height="3.5rem"
+  //     bgColor="white"
+  //     shadow="sm"
+  //     borderRadius="50%"
+  //     position="fixed"
+  //     right="2rem"
+  //     bottom="2rem"
+  //     zIndex={99}
+  //     color="dark"
+  //     sx={{ cursor: "pointer" }}
+  //     onClick={handleConfiguratorOpen}
+  //   >
+  //     <Icon fontSize="default" color="inherit">
+  //       settings
+  //     </Icon>
+  //   </ArgonBox>
+  // );
 
   return  (
     <ThemeProvider theme={darkMode ? themeDark : theme}>
@@ -164,7 +164,7 @@ export default function Header() {
             onMouseLeave={handleOnMouseLeave}
           />
           <Configurator />
-          {configsButton}
+          {/* {configsButton} */}
         </>
       )}
       {layout === "vr" && <Configurator />}

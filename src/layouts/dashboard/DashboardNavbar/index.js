@@ -52,7 +52,7 @@ import {
   useArgonController,
   setTransparentNavbar,
   setMiniSidenav,
-  setOpenConfigurator,
+  // setOpenConfigurator,
 } from "../../../context";
 
 // Images
@@ -63,7 +63,7 @@ import { AuthContext } from "../../../context/AuthContext";
 function DashboardNavbar({ absolute = false, light = true, isMini = false }) {
   const [navbarType, setNavbarType] = useState();
   const [controller, dispatch] = useArgonController();
-  const { miniSidenav, transparentNavbar, fixedNavbar, openConfigurator } = controller;
+  const { miniSidenav, transparentNavbar, fixedNavbar } = controller;
   const [openMenu, setOpenMenu] = useState(false);
   // Get the current route from the URL path, split by '/' and remove the first empty segment
   const route = useLocation().pathname.split("/").slice(1);
@@ -110,7 +110,7 @@ function DashboardNavbar({ absolute = false, light = true, isMini = false }) {
   }, [dispatch, fixedNavbar]);
 
   const handleMiniSidenav = () => setMiniSidenav(dispatch, !miniSidenav);
-  const handleConfiguratorOpen = () => setOpenConfigurator(dispatch, !openConfigurator);
+  // const handleConfiguratorOpen = () => setOpenConfigurator(dispatch, !openConfigurator);
   const handleOpenMenu = (event) => setOpenMenu(event.currentTarget);
   const handleCloseMenu = () => setOpenMenu(false);
 
@@ -212,14 +212,14 @@ function DashboardNavbar({ absolute = false, light = true, isMini = false }) {
               >
                 <Icon>{miniSidenav ? "menu_open" : "menu"}</Icon>
               </IconButton>
-              <IconButton
+              {/* <IconButton
                 size="small"
                 color={light && transparentNavbar ? "white" : "dark"}
                 sx={navbarIconButton}
                 onClick={handleConfiguratorOpen}
               >
                 <Icon>settings</Icon>
-              </IconButton>
+              </IconButton> */}
               <IconButton
                 size="small"
                 color={light && transparentNavbar ? "white" : "dark"}
