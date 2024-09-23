@@ -27,12 +27,12 @@ import ArgonTypography from "../../components/ArgonTypography";
 // Argon Dashboard 2 MUI base styles
 import typography from "../../assets/theme/base/typography";
 
-function Footer({ company = { href: "https://www.creative-tim.com/", name: "Creative Tim" },
+function Footer({ company = { href: "https://acnovate.com/", name: "Acnovate Technologies" },
   links = [
-    { href: "https://www.creative-tim.com/", name: "Creative Tim" },
-    { href: "https://www.creative-tim.com/presentation", name: "About Us" },
-    { href: "https://www.creative-tim.com/blog", name: "Blog" },
-    { href: "https://www.creative-tim.com/license", name: "License" },
+    // { href: "https://acnovate.com/", name: "Acnovate Technologies" },
+    { href: "https://acnovate.com/index.php?option=com_content&view=article&id=292&Itemid=223", name: "About Us" },
+    { href: "https://acnovate.com/index.php?option=com_content&view=article&id=324&Itemid=288", name: "Contact" },
+    { href: "https://acnovate.com/index.php?option=com_content&view=article&id=303&Itemid=111", name: "Services" },
   ], }) {
   const { href, name } = company;
   const { size } = typography;

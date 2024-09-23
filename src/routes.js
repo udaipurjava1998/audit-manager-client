@@ -68,7 +68,7 @@ import Dashboard from "./layouts/dashboard";
 import ArgonBox from "./components/ArgonBox";
 import Login from "./layouts/authentication/Login";
 import DashboardLayout from "./examples/LayoutContainers/DashboardLayout";
-import { Checklist, ImportExport, Schedule, Storage, VerifiedUser } from "@mui/icons-material";
+import { Checklist, ContactPage, ImportExport, Schedule, Storage, VerifiedUser } from "@mui/icons-material";
 import ViewAuditHome from "./layouts/view-audit/ViewAuditHome";
 import CreateOrUpdateAudit from "./layouts/view-audit/CreateOrUpdateAudit";
 import CreateOrUpdateUser from "./layouts/view-user/CreateOrUpdateUser";
@@ -103,7 +103,7 @@ const menuRoutes = [
         name: "User Data Management",
         key: "user-data",
         route: "/master-data-management/user-data",
-        icon: <Storage color="primary" fontSize="14px" />,
+        icon: <ContactPage color="primary" fontSize="14px" />,
         component: <ViewUserHome><></></ViewUserHome>,
       },
       // Add more submenu items here if needed

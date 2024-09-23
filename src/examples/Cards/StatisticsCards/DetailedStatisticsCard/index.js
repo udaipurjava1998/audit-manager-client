@@ -27,6 +27,7 @@ import ArgonTypography from "../../../../components/ArgonTypography";
 
 // Argon Dashboard 2 MUI contexts
 import { useArgonController } from "../../../../context";
+import pxToRem from "../../../../assets/theme/functions/pxToRem";
 
 function DetailedStaticsCard({ bgColor = "white", title, count, percentage = {
   color: "success",
@@ -81,6 +82,7 @@ function DetailedStaticsCard({ bgColor = "white", title, count, percentage = {
                   variant="button"
                   color={bgColor === "white" ? "text" : "white"}
                   textTransform="uppercase"
+                  fontSize={pxToRem(15)}
                   fontWeight="medium"
                 >
                   {title}
